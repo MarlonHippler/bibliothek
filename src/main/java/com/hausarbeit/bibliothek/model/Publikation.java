@@ -13,7 +13,6 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@EqualsAndHashCode
 public class Publikation implements Serializable {
 
     @Id
