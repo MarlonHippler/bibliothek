@@ -24,14 +24,12 @@ public class Publikation implements Serializable {
     )
     public int buch_ID;
     public String titel;
-    @ElementCollection
-    public List<String> autor;
+    public String autor;
     public Date veroeffentlichung;
     public String verlag;
-    public Publikationsart publikationsart;
+    public String publikationsart;
     public String ISBN;
-    @ElementCollection
-    public List<String> schlagwoerter;
+    public String schlagwoerter;
     public int bestandAnzahl;
 
 
@@ -43,7 +41,7 @@ public class Publikation implements Serializable {
         return titel;
     }
 
-    public List<String> getAutor() {
+    public String getAutor() {
         return autor;
     }
 
@@ -55,7 +53,7 @@ public class Publikation implements Serializable {
         return verlag;
     }
 
-    public Publikationsart getPublikationsart() {
+    public String getPublikationsart() {
         return publikationsart;
     }
 
@@ -63,7 +61,7 @@ public class Publikation implements Serializable {
         return ISBN;
     }
 
-    public List<String> getSchlagwoerter() {
+    public String getSchlagwoerter() {
         return schlagwoerter;
     }
 
@@ -79,7 +77,7 @@ public class Publikation implements Serializable {
         this.titel = titel;
     }
 
-    public void setAutor(List<String> autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
@@ -91,7 +89,7 @@ public class Publikation implements Serializable {
         this.verlag = verlag;
     }
 
-    public void setPublikationsart(Publikationsart publikationsart) {
+    public void setPublikationsart(String publikationsart) {
         this.publikationsart = publikationsart;
     }
 
@@ -99,7 +97,7 @@ public class Publikation implements Serializable {
         this.ISBN = ISBN;
     }
 
-    public void setSchlagwoerter(List<String> schlagwoerter) {
+    public void setSchlagwoerter(String schlagwoerter) {
         this.schlagwoerter = schlagwoerter;
     }
 
