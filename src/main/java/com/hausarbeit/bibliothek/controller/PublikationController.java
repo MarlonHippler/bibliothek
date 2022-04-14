@@ -8,10 +8,16 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@AllArgsConstructor
+
 public class PublikationController {
-    @Autowired
+
+
     private Publikationservices publikationservice;
+
+    @Autowired
+    public PublikationController(Publikationservices publikationservice){
+        this.publikationservice = publikationservice;
+    }
 
     @PostMapping("publikation/anlegen")
     public void publikationAnlegen(@RequestBody PublikationRequest request)  {

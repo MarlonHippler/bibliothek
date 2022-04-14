@@ -1,7 +1,6 @@
 package com.hausarbeit.bibliothek.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;import java.util.Date;
 import java.util.List;
@@ -12,17 +11,38 @@ import java.util.List;
  */
 
 @Entity
-@NoArgsConstructor
+@Table
 public class Publikation implements Serializable {
+
+    public Publikation (){
+
+    }
+
+    public Publikation (String titel,
+                        String autor,
+                        Date veroeffentlichung,
+                        String verlag,
+                        String publikationsart,
+                        String ISBN,
+                        String schlagwoerter,
+                        int bestandAnzahl )
+    { this.titel = titel;
+    this.autor= autor;
+    this.veroeffentlichung = veroeffentlichung;
+    this.verlag = verlag;
+    this.publikationsart = publikationsart;
+    this.ISBN = ISBN;
+    this.schlagwoerter = schlagwoerter;
+    this.bestandAnzahl = bestandAnzahl;}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
+            name = "publikation_sequence",
+            sequenceName = "publikation_sequence",
             allocationSize = 1
     )
-    public int buch_ID;
+    public Long buch_ID;
     public String titel;
     public String autor;
     public Date veroeffentlichung;
@@ -33,7 +53,7 @@ public class Publikation implements Serializable {
     public int bestandAnzahl;
 
 
-    public int getBuch_ID() {
+    public Long getBuch_ID() {
         return buch_ID;
     }
 
@@ -69,7 +89,7 @@ public class Publikation implements Serializable {
         return bestandAnzahl;
     }
 
-    public void setBuch_ID(int buch_ID) {
+    public void setBuch_ID(Long buch_ID) {
         this.buch_ID = buch_ID;
     }
 
