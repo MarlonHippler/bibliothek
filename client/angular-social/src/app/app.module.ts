@@ -9,6 +9,10 @@ import {PubAusleihenComponent} from "./pub-ausleihen/pub-ausleihen.component";
 import {PubRueckgabeComponent} from "./pub-rueckgabe/pub-rueckgabe.component";
 import {PubUebersichtComponent} from "./pub-uebersicht/pub-uebersicht.component";
 import { PubAnlegenComponent } from './pub-anlegen/pub-anlegen.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+
 
 
 @NgModule({
@@ -26,10 +30,14 @@ import { PubAnlegenComponent } from './pub-anlegen/pub-anlegen.component';
 
 
 
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
