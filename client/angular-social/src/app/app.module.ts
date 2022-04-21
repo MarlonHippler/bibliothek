@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {LeihvorgangVerlaengernComponent} from './leihvorgang-verlaengern/leihvorgang-verlaengern.component' ;
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingALTModule } from './app-routingALT.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { LeihvorgaengeUebersichtComponent } from './leihvorgaenge-uebersicht/leihvorgaenge-uebersicht.component' ;
@@ -14,11 +14,12 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+
     MenuComponent,
     LeihvorgangVerlaengernComponent,
     LeihvorgaengeUebersichtComponent,
@@ -28,20 +29,16 @@ import {RouterModule} from "@angular/router";
     PubAnlegenComponent,
 
 
-
-
-
-
-
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingALTModule,
+    RouterModule.forRoot(RouterModule),
     NoopAnimationsModule,
     MatInputModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule,
+    AppRoutingModule,
 
   ],
   providers: [],
