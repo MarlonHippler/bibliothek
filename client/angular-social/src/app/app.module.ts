@@ -9,10 +9,11 @@ import {PubAusleihenComponent} from "./pub-ausleihen/pub-ausleihen.component";
 import {PubRueckgabeComponent} from "./pub-rueckgabe/pub-rueckgabe.component";
 import {PubUebersichtComponent} from "./pub-uebersicht/pub-uebersicht.component";
 import { PubAnlegenComponent } from './pub-anlegen/pub-anlegen.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
-
+import {HttpClientModule} from "@angular/common/http";
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 
 
 
+
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     NoopAnimationsModule,
     MatInputModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,49 @@
+<body>
+<h2>Publikation anlegen</h2>
+
+<form [formGroup]="pubAusleihenForm">
+
+  <div class="form-group">
+
+
+    <mat-form-field>
+      <mat-label id="pubID">ID der Publikation</mat-label>
+      <input matInput formControlName="pubID" class="form-control">
+    </mat-form-field>
+
+  </div>
+  <div class="form-group">
+
+    <mat-form-field>
+      <mat-label id="vorname">Vorname des Studenten</mat-label>
+      <input matInput formControlName="vorname" class="form-control">
+    </mat-form-field>
+
+  </div>
+  <div class="form-group">
+
+    <mat-form-field>
+      <mat-label id="nachname">Nachname des Studenten</mat-label>
+      <input matInput formControlName="nachname" class="form-control">
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+
+    <mat-form-field>
+      <mat-label id="matrikelnummer">Matrikelnummer</mat-label>
+      <input matInput formControlName="matrikelnummer" class="form-control">
+    </mat-form-field>
+  </div>
+
+
+
+
+  <br>
+  <div class="form-group">
+    <button type="submit" (click)="onsubmit()">Ausleihen
+    </button>
+  </div>
+
+
+</form>
