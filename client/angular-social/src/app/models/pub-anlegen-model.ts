@@ -5,10 +5,10 @@ export interface PubAnlegenModel {
 
   titel: string
   autor: string
-  datum: Date
+  veroeffentlichung: Date
   verlag: string
   publikationsart: string
-  isbn: string
+  ISBN: string
   schlagwoerter: string
-  bestand: number
+  bestandAnzahl: number
 }

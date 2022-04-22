@@ -21,12 +21,12 @@ export class PubAnlegenComponent implements OnDestroy {
     this.pubAnlegenForm = new FormGroup({
       titel: new FormControl('', Validators.required),
       autor: new FormControl('', Validators.required),
-      datum: new FormControl('', Validators.required),
+      veroeffentlichung: new FormControl('', Validators.required),
       verlag: new FormControl(''),
       publikationsart: new FormControl(''),
-      isbn: new FormControl(''),
+      ISBN: new FormControl(''),
       schlagwoerter: new FormControl(''), // in Zukunft FormArray,
-      bestand: new FormControl('')
+      bestandAnzahl: new FormControl('')
 
     })
   }
@@ -40,13 +40,13 @@ export class PubAnlegenComponent implements OnDestroy {
 
         titel: this.pubAnlegenForm.get('titel')?.value,
         autor: this.pubAnlegenForm.get('autor')?.value,
-        datum: this.pubAnlegenForm.get('datum')?.value,
+        veroeffentlichung: this.pubAnlegenForm.get('veroeffentlichung')?.value,
         verlag: this.pubAnlegenForm.get('verlag')?.value,
         publikationsart: this.pubAnlegenForm.get('publikationsart')?.value,
 
-        isbn: this.pubAnlegenForm.get('isbn')?.value,
+        ISBN: this.pubAnlegenForm.get('ISBN')?.value,
         schlagwoerter: this.pubAnlegenForm.get('schlagwoerter')?.value,
-        bestand: this.pubAnlegenForm.get('bestand')?.value,
+        bestandAnzahl: this.pubAnlegenForm.get('bestandAnzahl')?.value,
 
       } as PubAnlegenModel
       this.pubService.erstellePub(pub).pipe(takeUntil(this.destroy$)).subscribe()
