@@ -1,10 +1,40 @@
 package com.hausarbeit.bibliothek.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Ausleihvorgang {
+@Table
+public class Ausleihvorgang implements Serializable {
+
+
+
+    public Ausleihvorgang (){
+
+    }
+
+    public Ausleihvorgang (Date ausgabedatum,
+                           Date rueckgabedatum,
+                           int ausleihzeitraum,
+                           int ausleihCounter,
+                           Long pubID,
+                           String name,
+                           String vorname,
+                           int matrikelnummer )
+    { this.ausgabedatum = ausgabedatum;
+        this.rueckgabedatum= rueckgabedatum;
+        this.ausleihzeitraum = ausleihzeitraum;
+        this.ausleihCounter = ausleihCounter;
+        this.pubID = pubID;
+        this.name = name;
+        this.vorname = vorname;
+        this.matrikelnummer = matrikelnummer;}
+
+
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @SequenceGenerator(
@@ -12,19 +42,21 @@ public class Ausleihvorgang {
             sequenceName = "user_sequence",
             allocationSize = 1
     )
-    public int vorgangID;
+    public Long vorgangID;
     public Date ausgabedatum;
     public Date rueckgabedatum;
-    public Date ausleihzeitraum;
+    public static int ausleihzeitraum = 14;
     public int ausleihCounter;
-    //public Publikation ausgeliehenesobjekt;
-    //public Student ausleiher;
+    public Long pubID;
+    public String name;
+    public String vorname;
+    public int matrikelnummer;
 
-    public int getVorgangID() {
+    public Long getVorgangID() {
         return vorgangID;
     }
 
-    public void setVorgangID(int vorgangID) {
+    public void setVorgangID(Long vorgangID) {
         this.vorgangID = vorgangID;
     }
 
@@ -44,11 +76,11 @@ public class Ausleihvorgang {
         this.rueckgabedatum = rueckgabedatum;
     }
 
-    public Date getAusleihzeitraum() {
+    public int getAusleihzeitraum() {
         return ausleihzeitraum;
     }
 
-    public void setAusleihzeitraum(Date ausleihzeitraum) {
+    public void setAusleihzeitraum(int ausleihzeitraum) {
         this.ausleihzeitraum = ausleihzeitraum;
     }
 
@@ -60,19 +92,35 @@ public class Ausleihvorgang {
         this.ausleihCounter = ausleihCounter;
     }
 
-   // public Publikation getAusgeliehenesobjekt() {
-  //      return ausgeliehenesobjekt;
-   // }
+    public Long getPubID() {
+        return pubID;
+    }
 
-  //  public void setAusgeliehenesobjekt(Publikation ausgeliehenesobjekt) {
-   //     this.ausgeliehenesobjekt = ausgeliehenesobjekt;
-   // }
+    public void setPubID(Long pubID) {
+        this.pubID = pubID;
+    }
 
-//    public Student getAusleiher() {
-  //      return ausleiher;
-  //  }
+    public String getName() {
+        return name;
+    }
 
-  //  public void setAusleiher(Student ausleiher) {
-   //     this.ausleiher = ausleiher;
-   // }
+    public void setName(String name) {
+        this.name= name;
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname= vorname;
+    }
+
+    public int getMatrikelnummer() {
+        return matrikelnummer;
+    }
+
+    public void setMatrikelnummer(int matrikelnummer) {
+        this.matrikelnummer = matrikelnummer;
+    }
 }

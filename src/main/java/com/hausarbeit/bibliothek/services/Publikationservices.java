@@ -34,9 +34,14 @@ public class Publikationservices {
 
     public void publikationUpdaten(){}
 
-    public void publikationLoeschen(){}
+    public void publikationLoeschen(long publikationID){
+        boolean existiert = publikationRepo.existsById(publikationID);
+        if (!existiert) {
+            throw new IllegalStateException("Publikation mit ID"+ publikationID +" existiert nicht");
+        }
+        publikationRepo.deleteById(publikationID);
+    }
 
-    public void publikationAnzeigen(){}
 
     public List<Publikation> publikationenLaden(){
         return this.publikationRepo.findAll();

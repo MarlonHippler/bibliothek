@@ -3,7 +3,7 @@ package com.hausarbeit.bibliothek.model;
 
 import javax.persistence.*;
 import java.io.Serializable;import java.util.Date;
-import java.util.List;
+
 /**
  * Model für Buch
  *
@@ -42,7 +42,7 @@ public class Publikation implements Serializable {
             sequenceName = "publikation_sequence",
             allocationSize = 1
     )
-    public Long buch_ID;
+    public Long publikation_ID;
     public String titel;
     public String autor;
     public Date veroeffentlichung;
@@ -53,8 +53,8 @@ public class Publikation implements Serializable {
     public int bestandAnzahl;
 
 
-    public Long getBuch_ID() {
-        return buch_ID;
+    public Long getPublikation_ID() {
+        return publikation_ID;
     }
 
     public String getTitel() {
@@ -89,8 +89,8 @@ public class Publikation implements Serializable {
         return bestandAnzahl;
     }
 
-    public void setBuch_ID(Long buch_ID) {
-        this.buch_ID = buch_ID;
+    public void setPublikation_ID(Long buch_ID) {
+        this.publikation_ID = buch_ID;
     }
 
     public void setTitel(String titel) {

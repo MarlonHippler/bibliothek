@@ -28,9 +28,16 @@ public class PublikationController {
         publikationservice.publikationAnlegen(request);
 
     }
-    @PostMapping("publikation/laden")
+
+    @GetMapping("publikation/laden")
     public List<Publikation> publikationenLaden() {
         return publikationservice.publikationenLaden();
+    }
+
+
+    @DeleteMapping(path = "publikationID")
+    public void publikationLoeschen(@PathVariable("publikationID") Long publikationID){
+        publikationservice.publikationLoeschen(publikationID);
     }
 
 
