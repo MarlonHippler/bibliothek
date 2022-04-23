@@ -1,7 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {PubAnlegenService} from "../services/pub-anlegen.service";
-import {PubAusleihenService} from "../services/pub-ausleihen.service";
+import {PubService} from "../services/pub.service";
 import {pipe, Subject, takeUntil} from "rxjs";
 import {PubAusleihenModel} from "../models/pub-ausleihen-model";
 
@@ -19,7 +18,7 @@ export class PubAusleihenComponent implements OnDestroy{
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
 
-  constructor(private pubAusleihenService: PubAusleihenService) {
+  constructor(private pubAusleihenService: PubService) {
     this.pubAusleihenForm = new FormGroup({
       pubID: new FormControl('', Validators.required),
       vorname: new FormControl('', Validators.required),

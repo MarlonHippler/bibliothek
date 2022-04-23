@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PubAnlegenService } from './pub-anlegen.service';
+import { PubService } from './pub.service';
 
 describe('PubAnlegenService', () => {
-  let service: PubAnlegenService;
+  let service: PubService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PubAnlegenService);
+    service = TestBed.inject(PubService);
   });
 
   it('should be created', () => {

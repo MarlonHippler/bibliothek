@@ -6,6 +6,8 @@ import com.hausarbeit.bibliothek.request.PublikationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class Publikationservices {
 
@@ -35,4 +37,8 @@ public class Publikationservices {
     public void publikationLoeschen(){}
 
     public void publikationAnzeigen(){}
+
+    public List<Publikation> publikationenLaden(){
+        return this.publikationRepo.findAll();
+    }
 }

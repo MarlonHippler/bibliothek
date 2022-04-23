@@ -3,10 +3,10 @@ import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  templateUrl: './publikations-uebersicht.component.html',
+  styleUrls: ['./publikations-uebersicht.component.css']
 })
-export class MenuComponent implements OnInit {
+export class PublikationsUebersichtComponent implements OnInit {
 
 
 

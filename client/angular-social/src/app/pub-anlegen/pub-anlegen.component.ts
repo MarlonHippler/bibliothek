@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Input} from "@angular/core";
-import {PubAnlegenService} from "../services/pub-anlegen.service";
+import {PubService} from "../services/pub.service";
 import {PubAnlegenModel} from "../models/pub-anlegen-model";
 import {Subject, takeUntil} from "rxjs";
 
@@ -17,7 +17,7 @@ export class PubAnlegenComponent implements OnDestroy {
   @Input() pubAnlegenForm: FormGroup;
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private pubService: PubAnlegenService) {
+  constructor(private pubService: PubService) {
     this.pubAnlegenForm = new FormGroup({
       titel: new FormControl('', Validators.required),
       autor: new FormControl('', Validators.required),

@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {LeihvorgangVerlaengernComponent} from './leihvorgang-verlaengern/leihvorgang-verlaengern.component' ;
 import {AppRoutingALTModule} from './app-routingALT.module';
 import {AppComponent} from './app.component';
-import {MenuComponent} from './menu/menu.component';
+import {PublikationsUebersichtComponent} from './publikationsUebersicht/publikations-uebersicht.component';
 import {LeihvorgaengeUebersichtComponent} from './leihvorgaenge-uebersicht/leihvorgaenge-uebersicht.component' ;
 import {PubAusleihenComponent} from "./pub-ausleihen/pub-ausleihen.component";
 import {PubRueckgabeComponent} from "./pub-rueckgabe/pub-rueckgabe.component";
@@ -21,7 +21,7 @@ import {RouterModule} from "@angular/router";
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
+    PublikationsUebersichtComponent,
     LeihvorgangVerlaengernComponent,
     LeihvorgaengeUebersichtComponent,
     PubAusleihenComponent,
@@ -35,7 +35,7 @@ import {RouterModule} from "@angular/router";
     BrowserModule,
     AppRoutingALTModule,
     NoopAnimationsModule,
-    RouterModule.forRoot([{path: 'menu', component: MenuComponent},
+    RouterModule.forRoot([{path: 'menu', component: PublikationsUebersichtComponent},
       {path: 'anlegen', component: PubAnlegenComponent},
       {path: 'ausleihen', component: PubAusleihenComponent}]),
     MatInputModule,

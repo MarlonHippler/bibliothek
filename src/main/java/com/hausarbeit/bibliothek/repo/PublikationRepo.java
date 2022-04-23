@@ -8,4 +8,5 @@ import java.util.Optional;
 @Repository
 public interface PublikationRepo extends JpaRepository<Publikation, Long > {
     Optional<Publikation> findPublikationsByTitel(String Titel);
+
 }
