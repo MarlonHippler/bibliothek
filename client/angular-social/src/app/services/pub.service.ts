@@ -22,7 +22,7 @@ export class PubService {
 
   }
   ausleihenPub(pubAusleihenModel: PubAusleihenModel): Observable<PubAusleihenModel> {
-    return this.http.post<PubAusleihenModel>(this.pubUrl + "publikation/ausleihen", pubAusleihenModel)
+    return this.http.post<PubAusleihenModel>(this.pubUrl + "ausleihen", pubAusleihenModel)
 
 
   }

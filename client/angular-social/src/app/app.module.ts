@@ -7,7 +7,7 @@ import {PublikationsUebersichtComponent} from './publikationsUebersicht/publikat
 import {LeihvorgaengeUebersichtComponent} from './leihvorgaenge-uebersicht/leihvorgaenge-uebersicht.component' ;
 import {PubAusleihenComponent} from "./pub-ausleihen/pub-ausleihen.component";
 import {PubRueckgabeComponent} from "./pub-rueckgabe/pub-rueckgabe.component";
-import {PubUebersichtComponent} from "./pub-uebersicht/pub-uebersicht.component";
+//import {PubUebersichtComponent} from "./pub-uebersicht/pub-uebersicht.component";
 import {PubAnlegenComponent} from './pub-anlegen/pub-anlegen.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from "@angular/material/input";
@@ -26,7 +26,7 @@ import {RouterModule} from "@angular/router";
     LeihvorgaengeUebersichtComponent,
     PubAusleihenComponent,
     PubRueckgabeComponent,
-    PubUebersichtComponent,
+    //PubUebersichtComponent,
     PubAnlegenComponent,
 
 

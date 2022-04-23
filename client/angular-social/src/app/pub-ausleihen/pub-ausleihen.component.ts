@@ -22,7 +22,7 @@ export class PubAusleihenComponent implements OnDestroy{
     this.pubAusleihenForm = new FormGroup({
       pubID: new FormControl('', Validators.required),
       vorname: new FormControl('', Validators.required),
-      nachname: new FormControl('', Validators.required),
+      name: new FormControl('', Validators.required),
       matrikelnummer: new FormControl('', Validators.required),
 
     })
@@ -38,7 +38,7 @@ export class PubAusleihenComponent implements OnDestroy{
 
         pubID: this.pubAusleihenForm.get('pubID')?.value,
         vorname: this.pubAusleihenForm.get('vorname')?.value,
-        nachname: this.pubAusleihenForm.get('nachname')?.value,
+        name: this.pubAusleihenForm.get('name')?.value,
         matrikelnummer: this.pubAusleihenForm.get('matrikelnummer')?.value,
 
 
