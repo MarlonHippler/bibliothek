@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {PubAusleihenModel} from "../models/pub-ausleihen-model";
 import {PubModel} from "../models/publikation-model";
+import {LeihvorgangModel} from "../models/leihvorgang-model";
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,10 @@ export class PubService {
 
 
   }
+  zeigeAlleAusgeliehenenPubs():Observable<LeihvorgangModel[]>  {
+    return this.http.get<LeihvorgangModel[]>(this.pubUrl +"ausleihen/leihvorgaengeLaden")
+  }
   zeigeAllePubs():Observable<PubModel[]>  {
     return this.http.get<PubModel[]>(this.pubUrl +"publikation/laden")
-}   //[] -> Liste erwartet
+}
 }

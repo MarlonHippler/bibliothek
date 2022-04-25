@@ -6,9 +6,12 @@
         <a class="navbar-brand" [routerLink]="['/']"><strong> {{"Bibliotheksverwaltung"}} </strong></a>
       </div>
       <ul class="nav navbar-nav">
+        <li><a [routerLink]="['pubuebersicht']">Publikationsbestand</a></li>
+        <li><a [routerLink]="['leihvorganguebersicht']">Ausgeliehene Werke</a></li>
         <li><a [routerLink]="['anlegen']">Publikation anlegen</a></li>
         <li><a [routerLink]="['ausleihen']">Publikation ausleihen</a></li>
-        <li><a [routerLink]="['menu']">Menu</a></li>
+
+
       </ul>
     </div>
   </nav>

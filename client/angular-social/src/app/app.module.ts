@@ -35,9 +35,12 @@ import {MatTableModule, MatTextColumn} from "@angular/material/table";
     BrowserModule,
     AppRoutingALTModule,
     NoopAnimationsModule,
-    RouterModule.forRoot([{path: 'menu', component: PubUebersichtComponent},
+    RouterModule.forRoot([{path: 'pubuebersicht', component: PubUebersichtComponent},
       {path: 'anlegen', component: PubAnlegenComponent},
-      {path: 'ausleihen', component: PubAusleihenComponent}]),
+      {path: 'ausleihen', component: PubAusleihenComponent},
+      {path: 'leihvorganguebersicht', component: LeihvorgaengeUebersichtComponent}
+
+    ]),
     MatInputModule,
     ReactiveFormsModule,
     HttpClientModule,
