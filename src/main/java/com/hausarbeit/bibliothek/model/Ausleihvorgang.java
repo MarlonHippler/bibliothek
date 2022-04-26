@@ -36,7 +36,7 @@ public class Ausleihvorgang implements Serializable {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @SequenceGenerator(
             name = "user_sequence",
             sequenceName = "user_sequence",

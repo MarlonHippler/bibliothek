@@ -36,7 +36,7 @@ public class Publikation implements Serializable {
     this.bestandAnzahl = bestandAnzahl;}
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @SequenceGenerator(
             name = "publikation_sequence",
             sequenceName = "publikation_sequence",
