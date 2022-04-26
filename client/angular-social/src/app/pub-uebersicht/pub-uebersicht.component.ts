@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, subscribeOn, takeUntil} from "rxjs";
+import {Observable, Subject, subscribeOn, takeUntil} from "rxjs";
 import {PubService} from "../services/pub.service";
 import {PubModel} from "../models/publikation-model";
 
@@ -21,6 +21,7 @@ export class PubUebersichtComponent implements OnInit , OnDestroy {
   displayedColumns: any[] = ['publikationID', 'titel', 'autor', 'veroeffentlichung', 'publikationsart',
     'verlag', 'isbn', 'schlagwoerter', 'bestandAnzahl', 'bearbeiten', 'loeschen'];
 
+  private destroy$: Subject<boolean> = new Subject<boolean>();
   public dataSource!: Observable<PubModel[]>;
 
   constructor(private pubService: PubService) {
@@ -33,8 +34,13 @@ export class PubUebersichtComponent implements OnInit , OnDestroy {
   toLocalDateString(veroeffentlichung: string): string {
     return new Date(veroeffentlichung).toISOString().slice(0, 10);
   }
-  pubLoeschen(pubID: number) { this.pubService.loeschePub(pubID).pipe(takeUntil())
+  pubLoeschen(pubID: number) { this.pubService.loeschePub(pubID).pipe(takeUntil(this.destroy$)).subscribe()
 
 
+  }
+  ngOnDestroy()
+  {
+    this.destroy$.next(true)
+    this.destroy$.unsubscribe()
   }
 }
