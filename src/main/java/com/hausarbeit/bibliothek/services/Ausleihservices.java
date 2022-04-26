@@ -7,6 +7,7 @@ import com.hausarbeit.bibliothek.request.AusleihRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -38,9 +39,23 @@ public class Ausleihservices {
         ausleihRepo.save(ausleihvorgang);
 
     }
-    public List<Ausleihvorgang> ausleihvorgangLaden(){
+    public List<Ausleihvorgang> ausleihvorgaengeLaden(){
         return this.ausleihRepo.findAll();
     }
+
+    public Ausleihvorgang ausleihvorgangLaden(Long vorgangID) {
+        if (vorgangID == null) {
+            throw new IllegalArgumentException("Vorgang-ID ist notwendig!");}
+        Ausleihvorgang ausleihvorgang;
+        try {
+            ausleihvorgang = this.ausleihRepo.findAusleihvorgangByVorgangID(vorgangID);
+        } catch (EntityNotFoundException e) {
+            throw new EntityNotFoundException(e.getMessage());
+
+        }
+        return ausleihvorgang;
+    }
+
     public void zurueckgeben(){}
 
     public void verlaengern(){}

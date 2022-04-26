@@ -30,7 +30,12 @@ public class AusleihController {
 
     }
     @GetMapping("ausleihen/leihvorgaengeLaden")
-    public List<Ausleihvorgang> ausleihvorgangLaden() {
-        return ausleihservice.ausleihvorgangLaden();
+    public List<Ausleihvorgang> ausleihvorgaengeLaden() {
+        return ausleihservice.ausleihvorgaengeLaden();
+    }
+
+    @GetMapping("ausleihen/leihvorgangLaden/{vorgangID}")
+    public Ausleihvorgang ausleihvorgangLaden(@PathVariable("vorgangID") Long vorgangID){
+        return ausleihservice.ausleihvorgangLaden(vorgangID);
     }
 }

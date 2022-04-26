@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 
 public interface AusleihRepo extends JpaRepository<Ausleihvorgang, Long > {
-    Optional<Ausleihvorgang> findAusleihvorgangByVorgangID(long ID);
+    Ausleihvorgang findAusleihvorgangByVorgangID(Long ID);
+
 }

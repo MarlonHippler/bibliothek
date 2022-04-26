@@ -3,7 +3,6 @@ package com.hausarbeit.bibliothek.controller;
 import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.request.PublikationRequest;
 import com.hausarbeit.bibliothek.services.Publikationservices;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,8 +41,9 @@ public class PublikationController {
 
     @GetMapping(path = "publikation/laden/{publikationID}")
     public Publikation publikationLaden(@PathVariable Long publikationID) {
-return publikationservice.publikationLaden(publikationID);
+    return publikationservice.publikationLaden(publikationID);
     }
 
-
-}
+    @PutMapping("publikation/update/{publikationID}")
+    public void publikationUpdate(Publikation publikation){}
+    }
