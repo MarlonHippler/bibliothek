@@ -1,6 +1,8 @@
 package com.hausarbeit.bibliothek.services;
 
+import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
+import com.hausarbeit.bibliothek.repo.AusleihRepo;
 import com.hausarbeit.bibliothek.repo.PublikationRepo;
 import com.hausarbeit.bibliothek.request.PublikationRequest;
 import org.jetbrains.annotations.NotNull;
@@ -14,10 +16,12 @@ import java.util.List;
 public class Publikationservices {
 
     private PublikationRepo publikationRepo;
+    private AusleihRepo ausleihRepo;
 
     @Autowired
-    public Publikationservices(PublikationRepo publikationRepo) {
+    public Publikationservices(PublikationRepo publikationRepo, AusleihRepo ausleihRepo) {
         this.publikationRepo = publikationRepo;
+        this.ausleihRepo = ausleihRepo;
     }
 
     public void publikationAnlegen(PublikationRequest request) {
@@ -72,6 +76,9 @@ public class Publikationservices {
             return publikation;
         }
 
+    public List<Ausleihvorgang> zugehoerigeAusleihvorgaenge(Long publikationID) {
+        return ausleihRepo.findByPublikationID(publikationID);
     }
+}
 
 

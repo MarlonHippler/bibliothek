@@ -1,5 +1,6 @@
 package com.hausarbeit.bibliothek.controller;
 
+import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.request.PublikationRequest;
 import com.hausarbeit.bibliothek.services.Publikationservices;
@@ -47,4 +48,11 @@ public class PublikationController {
     public void publikationUpdate(@PathVariable Long publikationID, @RequestBody Publikation publikation){
             publikationservice.publikationUpdaten(publikationID,publikation);
     }
+
+    @GetMapping("publikation/ausleihvorgaenge/{publikationID}")
+    public List<Ausleihvorgang> zugehoerigeAusleihvorgaenge(@PathVariable Long publikationID){
+        return publikationservice.zugehoerigeAusleihvorgaenge(publikationID);
+    }
+
+
     }
