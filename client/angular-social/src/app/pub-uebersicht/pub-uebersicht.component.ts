@@ -18,8 +18,8 @@ import {PubModel} from "../models/publikation-model";
 //   schlagwoerter: string
 //   bestandAnzahl: number
 export class PubUebersichtComponent implements OnInit {
-  displayedColumns: string[] = ['publikation_ID', 'titel', 'autor', 'veroeffentlichung', 'publikationsart',
-    'verlag', 'isbn', 'schlagwoerter', 'bestandAnzahl'];
+  displayedColumns: any[] = ['publikation_ID', 'titel', 'autor', 'veroeffentlichung', 'publikationsart',
+    'verlag', 'isbn', 'schlagwoerter', 'bestandAnzahl', 'bearbeiten'];
 
   public dataSource!: Observable<PubModel[]>;
 

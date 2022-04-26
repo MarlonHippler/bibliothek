@@ -1,0 +1,82 @@
+<body>
+<h2>Publikation anlegen</h2>
+
+
+<form [formGroup]="pubEditierenForm">
+
+  <div class="form-group">
+
+    <mat-form-field>
+      <mat-label id="id">Publikations ID</mat-label>
+      <input matInput formControlName="pubID" class="form-control">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label id="titel">Titel</mat-label>
+      <input matInput formControlName="titel" class="form-control">
+    </mat-form-field>
+
+  </div>
+  <div class="form-group">
+
+    <mat-form-field>
+      <mat-label id="autor">Autor</mat-label>
+      <input matInput formControlName="autor" class="form-control">
+    </mat-form-field>
+
+  </div>
+  <div class="form-group">
+
+    <mat-form-field>
+      <mat-label id="veroeffentlichung">Veröffentlichkeitsdatum (JJJJ-MM-TT)</mat-label>
+      <input matInput formControlName="veroeffentlichung" class="form-control">
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+
+    <mat-form-field>
+      <mat-label id="verlag">Verlag</mat-label>
+      <input matInput formControlName="verlag" class="form-control">
+    </mat-form-field>
+  </div>
+
+
+  <div class="form-group">
+
+    <mat-form-field>
+      <mat-label id="publikationsart">Publikationsart</mat-label>
+      <input matInput formControlName="publikationsart" class="form-control">
+    </mat-form-field>
+
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label id="ISBN">ISBN</mat-label>
+      <input matInput formControlName="ISBN" class="form-control">
+    </mat-form-field>
+
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label id="bestandAnzahl">Anzahl des Bestands</mat-label>
+      <input matInput formControlName="bestandAnzahl" class="form-control">
+    </mat-form-field>
+
+  </div>
+  <div class="form-group">
+
+    <mat-form-field>
+      <mat-label id="schlagwoerter">Schlagwörter</mat-label>
+      <input matInput formControlName="schlagwoerter" class="form-control">
+    </mat-form-field>
+  </div>
+  <br>
+  <div class="form-group">
+    <button type="submit" (click)="onsubmit()"> Bearbeitung speichern
+    </button>
+  </div>
+
+
+</form>
+</body>>

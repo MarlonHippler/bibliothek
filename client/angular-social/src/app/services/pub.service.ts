@@ -33,4 +33,8 @@ export class PubService {
   zeigeAllePubs():Observable<PubModel[]>  {
     return this.http.get<PubModel[]>(this.pubUrl +"publikation/laden")
 }
+
+// bearbeitePub(): Observable<PubModel> {
+//     return this.http.put<PubModel>( this.pubUrl + "publikation/editieren")
+//}
 }

@@ -2,10 +2,7 @@
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
 
-  <!-- Position Column -->
   <mat-text-column headerText = "ID" name="publikation_ID"></mat-text-column>
   <mat-text-column headerText = "Titel" name="titel"></mat-text-column>
   <mat-text-column headerText = "Autor" name="autor"></mat-text-column>
@@ -21,6 +18,17 @@
   <mat-text-column headerText = "Anzahl im Bestand "name="bestandAnzahl"></mat-text-column>
   <mat-text-column headerText = "Art der Publikation" name="publikationsart"></mat-text-column>
 
+  <ng-container matColumnDef="bearbeiten">
+    <mat-header-cell  *matHeaderCellDef > Bearbeiten </mat-header-cell>
+    <mat-cell *matCellDef="let row" >
+      <button mat-button  routerLink="/editieren" > Bearbeiten</button>
+    </mat-cell>
+  </ng-container>
+
+<!--  <ng-container matColumnDef="bearbeiten">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Bearbeiten </th>-->
+<!--     <button class="btn btn-success pull-right" ><a routerLink="editieren"> Diese Publikation bearbeiten</a></button>-->
+<!--  </ng-container>-->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
