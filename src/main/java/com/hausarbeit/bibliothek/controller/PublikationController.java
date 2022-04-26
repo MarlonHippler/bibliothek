@@ -35,7 +35,7 @@ public class PublikationController {
     }
 
 
-    @DeleteMapping(path = "publikationID")
+    @DeleteMapping(path = "{publikationID}")
     public void publikationLoeschen(@PathVariable("publikationID") Long publikationID){
         publikationservice.publikationLoeschen(publikationID);
     }

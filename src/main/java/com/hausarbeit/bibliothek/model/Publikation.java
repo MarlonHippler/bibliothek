@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;import java.util.Date;
 
 /**
- * Model für Buch
+ * Model für Publikation
  *
  * @author Marlon Hippler
  */
