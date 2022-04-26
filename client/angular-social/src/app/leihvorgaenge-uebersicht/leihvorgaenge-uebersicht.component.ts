@@ -32,6 +32,6 @@ export class LeihvorgaengeUebersichtComponent implements OnInit {
   }
 
   toLocalDateString(veroeffentlichung: string): string {
-    return new Date(veroeffentlichung).toLocaleDateString()
+    return new Date(veroeffentlichung).toUTCString()
   }
 }

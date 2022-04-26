@@ -11,7 +11,7 @@ import java.io.Serializable;import java.util.Date;
  */
 
 @Entity
-@Table
+@Table(name = "publikation")
 public class Publikation implements Serializable {
 
     public Publikation (){
@@ -42,7 +42,7 @@ public class Publikation implements Serializable {
             sequenceName = "publikation_sequence",
             allocationSize = 1
     )
-    public Long publikation_ID;
+    public Long publikationID;
     public String titel;
     public String autor;
     public Date veroeffentlichung;
@@ -53,8 +53,8 @@ public class Publikation implements Serializable {
     public int bestandAnzahl;
 
 
-    public Long getPublikation_ID() {
-        return publikation_ID;
+    public Long getPublikationID() {
+        return publikationID;
     }
 
     public String getTitel() {
@@ -89,8 +89,8 @@ public class Publikation implements Serializable {
         return bestandAnzahl;
     }
 
-    public void setPublikation_ID(Long buch_ID) {
-        this.publikation_ID = buch_ID;
+    public void setPublikationID(Long buch_ID) {
+        this.publikationID = buch_ID;
     }
 
     public void setTitel(String titel) {

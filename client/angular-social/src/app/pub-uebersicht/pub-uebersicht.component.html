@@ -3,7 +3,7 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 
-  <mat-text-column headerText = "ID" name="publikation_ID"></mat-text-column>
+  <mat-text-column headerText = "ID" name="publikationID"></mat-text-column>
   <mat-text-column headerText = "Titel" name="titel"></mat-text-column>
   <mat-text-column headerText = "Autor" name="autor"></mat-text-column>
   <mat-text-column headerText = "ISBN" name="isbn"></mat-text-column>
@@ -21,13 +21,13 @@
   <ng-container matColumnDef="bearbeiten">
     <mat-header-cell  *matHeaderCellDef > Bearbeiten </mat-header-cell>
     <mat-cell *matCellDef="let row" >
-      <button mat-button  routerLink="/editieren" > Bearbeiten</button>
+      <button mat-button  [routerLink]="['/anlegen/', row.publikationID ]" > Bearbeiten</button>
     </mat-cell>
   </ng-container>
     <ng-container matColumnDef="loeschen">
       <mat-header-cell  *matHeaderCellDef > Löschen </mat-header-cell>
       <mat-cell *matCellDef="let row" >
-        <button mat-button  routerLink="/loeschen" > Löschen </button>
+        <button mat-button (click)="pubLoeschen(row.publikationID)" ) > Löschen </button>
       </mat-cell>
 
   </ng-container>

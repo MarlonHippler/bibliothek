@@ -18,28 +18,32 @@ public class PublikationController {
     private Publikationservices publikationservice;
 
     @Autowired
-    public PublikationController(Publikationservices publikationservice){
+    public PublikationController(Publikationservices publikationservice) {
         this.publikationservice = publikationservice;
     }
 
     @PostMapping("publikation/anlegen")
-    public void publikationAnlegen(@RequestBody PublikationRequest request)  {
+    public void publikationAnlegen(@RequestBody PublikationRequest request) {
 
         publikationservice.publikationAnlegen(request);
 
     }
 
-    @GetMapping("publikation/laden")
+    @GetMapping("publikation/alleLaden")
     public List<Publikation> publikationenLaden() {
         return publikationservice.publikationenLaden();
     }
 
 
     @DeleteMapping(path = "publikation/loeschen/{publikationID}")
-    public void publikationLoeschen(@PathVariable("publikationID") Long publikationID){
+    public void publikationLoeschen(@PathVariable("publikationID") Long publikationID) {
         publikationservice.publikationLoeschen(publikationID);
     }
 
+    @GetMapping(path = "publikation/laden/{publikationID}")
+    public Publikation publikationLaden(@PathVariable Long publikationID) {
+return publikationservice.publikationLaden(publikationID);
+    }
 
 
 }

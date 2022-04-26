@@ -33,15 +33,22 @@ export class PubService {
     return this.http.get<LeihvorgangModel[]>(this.pubUrl + "ausleihen/leihvorgaengeLaden")
   }
 
+
+
+
   zeigeAllePubs(): Observable<PubModel[]> {
-    return this.http.get<PubModel[]>(this.pubUrl + "publikation/laden")
+    return this.http.get<PubModel[]>(this.pubUrl + "publikation/alleLaden")
   }
 
-  loeschePub(): Observable<PubModel> {
-    return this.http.delete<PubModel>(this.pubUrl + "publikationID")
+  zeigeEinenPub(publikationID: number): Observable<PubModel> {
+    return this.http.get<PubModel>(this.pubUrl + "publikation/laden/" + publikationID)
   }
 
-// bearbeitePub(): Observable<PubModel> {
-//     return this.http.put<PubModel>( this.pubUrl + "publikation/editieren")
-//}
+  loeschePub(pubID: number): Observable<PubModel> {
+    return this.http.delete<PubModel>(this.pubUrl + "publikation/loeschen/{publikationID}")
+  }
+
+bearbeitePub(pub: PubModel): Observable<PubModel> {
+    return this.http.put<PubModel>( this.pubUrl + "publikation/editieren", pub)
+}
 }

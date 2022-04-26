@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable, subscribeOn, takeUntil} from "rxjs";
 import {PubService} from "../services/pub.service";
 import {PubModel} from "../models/publikation-model";
 
@@ -17,8 +17,8 @@ import {PubModel} from "../models/publikation-model";
 //   ISBN: string
 //   schlagwoerter: string
 //   bestandAnzahl: number
-export class PubUebersichtComponent implements OnInit {
-  displayedColumns: any[] = ['publikation_ID', 'titel', 'autor', 'veroeffentlichung', 'publikationsart',
+export class PubUebersichtComponent implements OnInit , OnDestroy {
+  displayedColumns: any[] = ['publikationID', 'titel', 'autor', 'veroeffentlichung', 'publikationsart',
     'verlag', 'isbn', 'schlagwoerter', 'bestandAnzahl', 'bearbeiten', 'loeschen'];
 
   public dataSource!: Observable<PubModel[]>;
@@ -31,6 +31,10 @@ export class PubUebersichtComponent implements OnInit {
   }
 
   toLocalDateString(veroeffentlichung: string): string {
-    return new Date(veroeffentlichung).toLocaleDateString()
+    return new Date(veroeffentlichung).toISOString().slice(0, 10);
+  }
+  pubLoeschen(pubID: number) { this.pubService.loeschePub(pubID).pipe(takeUntil())
+
+
   }
 }

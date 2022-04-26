@@ -4,6 +4,8 @@ import {Input} from "@angular/core";
 import {PubService} from "../services/pub.service";
 import {PubAnlegenModel} from "../models/pub-anlegen-model";
 import {Subject, takeUntil} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
+import {PubModel} from "../models/publikation-model";
 
 
 @Component({
@@ -11,13 +13,15 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './pub-anlegen.component.html',
   styleUrls: ['./pub-anlegen.component.css']
 })
-export class PubAnlegenComponent implements OnDestroy {
+export class PubAnlegenComponent implements OnDestroy, OnInit {
 
 
   @Input() pubAnlegenForm: FormGroup;
   private destroy$: Subject<boolean> = new Subject<boolean>();
+  pubID!: number;
 
-  constructor(private pubService: PubService) {
+
+  constructor(private pubService: PubService, private route: ActivatedRoute) {
     this.pubAnlegenForm = new FormGroup({
       titel: new FormControl('', Validators.required),
       autor: new FormControl('', Validators.required),
@@ -31,13 +35,31 @@ export class PubAnlegenComponent implements OnDestroy {
     })
   }
 
+
+  toLocalDateString(veroeffentlichung: string): string {
+    return new Date(veroeffentlichung).toISOString().slice(0, 10);
+  }
+
   onsubmit(): void {
 
     if (
       this.pubAnlegenForm.valid
     ) {
-      let pub = {
+      if (this.pubID) {
+        let pubUpdate = {
+          pubID: this.pubID,
+          titel: this.pubAnlegenForm.get('titel')?.value,
+          autor: this.pubAnlegenForm.get('autor')?.value,
+          veroeffentlichung: this.pubAnlegenForm.get('veroeffentlichung')?.value,
+          verlag: this.pubAnlegenForm.get('verlag')?.value,
+          publikationsart: this.pubAnlegenForm.get('publikationsart')?.value,
 
+          ISBN: this.pubAnlegenForm.get('ISBN')?.value,
+          schlagwoerter: this.pubAnlegenForm.get('schlagwoerter')?.value,
+          bestandAnzahl: this.pubAnlegenForm.get('bestandAnzahl')?.value,
+        } as PubModel
+          this.pubService.bearbeitePub(pubUpdate).pipe(takeUntil(this.destroy$)).subscribe()
+        } else {let pub = {
         titel: this.pubAnlegenForm.get('titel')?.value,
         autor: this.pubAnlegenForm.get('autor')?.value,
         veroeffentlichung: this.pubAnlegenForm.get('veroeffentlichung')?.value,
@@ -49,18 +71,45 @@ export class PubAnlegenComponent implements OnDestroy {
         bestandAnzahl: this.pubAnlegenForm.get('bestandAnzahl')?.value,
 
       } as PubAnlegenModel
-      this.pubService.erstellePub(pub).pipe(takeUntil(this.destroy$)).subscribe()
+        this.pubService.erstellePub(pub).pipe(takeUntil(this.destroy$)).subscribe()}
+
+
+      }
+
 
     }
 
+    ngOnDestroy()
+    {
+      this.destroy$.next(true)
+      this.destroy$.unsubscribe()
+    }
 
-  }
+    ngOnInit()
+    {
+      this.pubID = parseInt(this.route.snapshot.paramMap.get('id') as string);
+      console.log(this.pubID)
+      if (this.pubID) {
+        this.pubService.zeigeEinenPub(this.pubID)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(pub => {
+            this.pubAnlegenForm.get('titel')?.setValue(pub.titel)
+            this.pubAnlegenForm.get('publikationsart')?.setValue(pub.publikationsart)
+            this.pubAnlegenForm.get('ISBN')?.setValue(pub.ISBN)
+            this.pubAnlegenForm.get('autor')?.setValue(pub.autor)
+            this.pubAnlegenForm.get('veroeffentlichung')?.setValue(this.toLocalDateString(pub.veroeffentlichung))
+            this.pubAnlegenForm.get('titel')?.setValue(pub.titel)
+            this.pubAnlegenForm.get('bestandAnzahl')?.setValue(pub.bestandAnzahl)
+            this.pubAnlegenForm.get('verlag')?.setValue(pub.verlag)
+            this.pubAnlegenForm.get('schlagwoerter')?.setValue(pub.schlagwoerter)
+          })
 
-  ngOnDestroy() {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
+
+      }
+
+
+    }
   }
-}
 
 
 

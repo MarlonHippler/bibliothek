@@ -16,8 +16,8 @@ import {Routes} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {MatTableModule, MatTextColumn} from "@angular/material/table";
-import {PubEditierenComponent} from "./pub-editieren/pub-editieren.component";
-import {PubLoeschenComponent} from "./pub-loeschen/pub-loeschen.component";
+
+// import {PubLoeschenComponent} from "./pub-loeschen/pub-loeschen.component";
 import {MatButtonModule} from "@angular/material/button";
 
 
@@ -31,8 +31,8 @@ import {MatButtonModule} from "@angular/material/button";
     PubRueckgabeComponent,
     PubUebersichtComponent,
     PubAnlegenComponent,
-    PubEditierenComponent,
-    PubLoeschenComponent,
+
+    // PubLoeschenComponent,
 
 
   ],
@@ -42,10 +42,11 @@ import {MatButtonModule} from "@angular/material/button";
     NoopAnimationsModule,
     RouterModule.forRoot([{path: 'pubuebersicht', component: PubUebersichtComponent},
       {path: 'anlegen', component: PubAnlegenComponent},
+      {path: 'anlegen/:id', component: PubAnlegenComponent},
       {path: 'ausleihen', component: PubAusleihenComponent},
       {path: 'leihvorganguebersicht', component: LeihvorgaengeUebersichtComponent},
-      {path: 'editieren', component: PubEditierenComponent},
-      {path: 'loeschen', component: PubLoeschenComponent}
+
+      // {path: 'loeschen', component: PubLoeschenComponent}
 
     ]),
     MatInputModule,
