@@ -26,25 +26,31 @@ public class Ausleihservices {
     }
 
     public void ausleihen(AusleihRequest ausleihRequest){
-        Ausleihvorgang ausleihvorgang = new Ausleihvorgang();
-        ausleihvorgang.setMatrikelnummer(ausleihRequest.getMatrikelnummer());
-        ausleihvorgang.setName(ausleihRequest.getName());
-        ausleihvorgang.setVorname(ausleihRequest.getVorname());
-        ausleihvorgang.setPubID(ausleihRequest.getPubID());
-        ausleihvorgang.setAusleihCounter(0);
-        Calendar calendar = Calendar.getInstance();
-        Date ausgabedatum = calendar.getTime();
-        calendar.setTime(ausgabedatum);
-        ausleihvorgang.setAusgabedatum(ausgabedatum);
-        calendar.add(Calendar.DATE, Ausleihvorgang.ausleihzeitraum);
-        Date rueckgabedatum = calendar.getTime();
-        ausleihvorgang.setRueckgabedatum(rueckgabedatum);
-        ausleihRepo.save(ausleihvorgang);
-
         Publikation publikation = publikationRepo.findPublikationByPublikationID(ausleihRequest.getPubID());
-        Integer neueBestandsAnzahl = publikation.getBestandAnzahl() - 1;
-        publikation.setBestandAnzahl(neueBestandsAnzahl);
-        publikationRepo.save(publikation);
+        Integer Bestandsanzahl = publikation.getBestandAnzahl();
+        if(Bestandsanzahl<1){
+            throw new IllegalArgumentException("Es sind nicht mehr genügend Exemplare verfügbar");
+        } else {
+            Ausleihvorgang ausleihvorgang = new Ausleihvorgang();
+            ausleihvorgang.setMatrikelnummer(ausleihRequest.getMatrikelnummer());
+            ausleihvorgang.setName(ausleihRequest.getName());
+            ausleihvorgang.setVorname(ausleihRequest.getVorname());
+            ausleihvorgang.setPubID(ausleihRequest.getPubID());
+            ausleihvorgang.setAusleihCounter(0);
+            Calendar calendar = Calendar.getInstance();
+            Date ausgabedatum = calendar.getTime();
+            calendar.setTime(ausgabedatum);
+            ausleihvorgang.setAusgabedatum(ausgabedatum);
+            calendar.add(Calendar.DATE, Ausleihvorgang.ausleihzeitraum);
+            Date rueckgabedatum = calendar.getTime();
+            ausleihvorgang.setRueckgabedatum(rueckgabedatum);
+            ausleihRepo.save(ausleihvorgang);
+
+
+            Integer neueBestandsAnzahl = Bestandsanzahl - 1;
+            publikation.setBestandAnzahl(neueBestandsAnzahl);
+            publikationRepo.save(publikation);
+        }
     }
 
     public List<Ausleihvorgang> ausleihvorgaengeLaden(){
