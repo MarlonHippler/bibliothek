@@ -19,5 +19,5 @@ public class PublikationRequest {
     public String publikationsart;
     public String ISBN;
     public String schlagwoerter;
-    public int bestandAnzahl;
+    public Integer bestandAnzahl;
 }

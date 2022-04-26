@@ -3,6 +3,7 @@ package com.hausarbeit.bibliothek.services;
 import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.repo.PublikationRepo;
 import com.hausarbeit.bibliothek.request.PublikationRequest;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,10 +31,19 @@ public class Publikationservices {
         publikation.setSchlagwoerter(request.getSchlagwoerter());
         publikation.setVeroeffentlichung(request.getVeroeffentlichung());
         publikationRepo.save(publikation);
-
     }
 
-    public void publikationUpdaten() {
+    public void publikationUpdaten(Long publikationID, Publikation request) {
+        Publikation publikationneu = publikationRepo.findPublikationByPublikationID(publikationID);
+        publikationneu.setTitel(request.getTitel());
+        publikationneu.setPublikationsart(request.getPublikationsart());
+        publikationneu.setAutor(request.getAutor());
+        publikationneu.setISBN(request.getISBN());
+        publikationneu.setBestandAnzahl(request.getBestandAnzahl());
+        publikationneu.setVerlag(request.getVerlag());
+        publikationneu.setSchlagwoerter(request.getSchlagwoerter());
+        publikationneu.setVeroeffentlichung(request.getVeroeffentlichung());
+        publikationRepo.save(publikationneu);
     }
 
     public void publikationLoeschen(long publikationID) {

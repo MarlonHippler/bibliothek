@@ -50,7 +50,7 @@ public class Publikation implements Serializable {
     public String publikationsart;
     public String ISBN;
     public String schlagwoerter;
-    public int bestandAnzahl;
+    public Integer bestandAnzahl;
 
 
     public Long getPublikationID() {
@@ -85,7 +85,7 @@ public class Publikation implements Serializable {
         return schlagwoerter;
     }
 
-    public int getBestandAnzahl() {
+    public Integer getBestandAnzahl() {
         return bestandAnzahl;
     }
 
@@ -121,7 +121,7 @@ public class Publikation implements Serializable {
         this.schlagwoerter = schlagwoerter;
     }
 
-    public void setBestandAnzahl(int bestandAnzahl) {
+    public void setBestandAnzahl(Integer bestandAnzahl) {
         this.bestandAnzahl = bestandAnzahl;
     }
 }

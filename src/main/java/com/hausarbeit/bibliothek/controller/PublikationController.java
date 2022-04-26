@@ -23,7 +23,6 @@ public class PublikationController {
 
     @PostMapping("publikation/anlegen")
     public void publikationAnlegen(@RequestBody PublikationRequest request) {
-
         publikationservice.publikationAnlegen(request);
 
     }
@@ -45,5 +44,7 @@ public class PublikationController {
     }
 
     @PutMapping("publikation/update/{publikationID}")
-    public void publikationUpdate(Publikation publikation){}
+    public void publikationUpdate(@PathVariable Long publikationID, @RequestBody Publikation publikation){
+            publikationservice.publikationUpdaten(publikationID,publikation);
+    }
     }
