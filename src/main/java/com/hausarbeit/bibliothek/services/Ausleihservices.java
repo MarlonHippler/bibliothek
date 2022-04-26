@@ -3,6 +3,7 @@ package com.hausarbeit.bibliothek.services;
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.repo.AusleihRepo;
+import com.hausarbeit.bibliothek.repo.PublikationRepo;
 import com.hausarbeit.bibliothek.request.AusleihRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,12 @@ import java.util.List;
 public class Ausleihservices {
 
     private AusleihRepo ausleihRepo;
+    private PublikationRepo publikationRepo;
 
     @Autowired
-    public Ausleihservices (AusleihRepo ausleihRepo){
+    public Ausleihservices (AusleihRepo ausleihRepo, PublikationRepo publikationRepo){
         this.ausleihRepo = ausleihRepo;
+        this.publikationRepo = publikationRepo;
     }
 
     public void ausleihen(AusleihRequest ausleihRequest){
@@ -38,7 +41,12 @@ public class Ausleihservices {
         ausleihvorgang.setRueckgabedatum(rueckgabedatum);
         ausleihRepo.save(ausleihvorgang);
 
+        Publikation publikation = publikationRepo.findPublikationByPublikationID(ausleihRequest.getPubID());
+        Integer neueBestandsAnzahl = publikation.getBestandAnzahl() - 1;
+        publikation.setBestandAnzahl(neueBestandsAnzahl);
+        publikationRepo.save(publikation);
     }
+
     public List<Ausleihvorgang> ausleihvorgaengeLaden(){
         return this.ausleihRepo.findAll();
     }
@@ -56,7 +64,36 @@ public class Ausleihservices {
         return ausleihvorgang;
     }
 
-    public void zurueckgeben(){}
+    public void zurueckgeben(Long vorgangID){
 
-    public void verlaengern(){}
+        Long pubID = ausleihRepo.findAusleihvorgangByVorgangID(vorgangID).getPubID();
+        Integer neueAnzahl = publikationRepo.findPublikationByPublikationID(pubID).getBestandAnzahl()+1;
+
+        Publikation publikation = publikationRepo.findPublikationByPublikationID(pubID);
+        publikation.setBestandAnzahl(neueAnzahl);
+        publikationRepo.save(publikation);
+
+        ausleihRepo.deleteById(vorgangID);
+
+    }
+
+    public void verlaengern(Long vorgangID){
+
+        Ausleihvorgang ausleihvorgang = ausleihRepo.findAusleihvorgangByVorgangID(vorgangID);
+        int counter = ausleihvorgang.getAusleihCounter();
+        if (counter>1){
+            throw new IllegalArgumentException("Maximale Anzahl von Verlängerungen erreicht");
+        } else {
+            counter ++;
+            Calendar calendar = Calendar.getInstance();
+            Date altesRueckgabedatum = ausleihvorgang.getRueckgabedatum();
+            calendar.setTime(altesRueckgabedatum);
+            calendar.add(Calendar.DATE, Ausleihvorgang.ausleihzeitraum);
+            Date neuesRueckgabedatum = calendar.getTime();
+            ausleihvorgang.setRueckgabedatum(neuesRueckgabedatum);
+            ausleihvorgang.setAusleihCounter(counter);
+            ausleihRepo.save(ausleihvorgang);
+        }
+
+    }
 }

@@ -38,4 +38,16 @@ public class AusleihController {
     public Ausleihvorgang ausleihvorgangLaden(@PathVariable("vorgangID") Long vorgangID){
         return ausleihservice.ausleihvorgangLaden(vorgangID);
     }
+
+    @PutMapping("ausleihen/zurueckgeben/{vorgangID}")
+    public void zurueckgeben(@PathVariable Long vorgangID){
+        ausleihservice.zurueckgeben(vorgangID);
+
+    }
+
+    @PutMapping("ausleihen/verlaengern/{vorgangID}")
+    public void verlaengern(@PathVariable Long vorgangID){
+        ausleihservice.verlaengern(vorgangID);
+    }
+
 }
