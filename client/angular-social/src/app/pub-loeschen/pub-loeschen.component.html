@@ -1,0 +1,19 @@
+<h2>Sind Sie sicher, dass Sie die ausgewählte Publikation löschen möchten?</h2>
+
+<!--button 1 onSubmit delete-->
+<form [formGroup]="pubLoeschenForm">
+
+  <div class="form-group">
+
+    <mat-form-field>
+      <mat-label id="id">Publikations ID</mat-label>
+      <input matInput formControlName="pubID" class="form-control">
+    </mat-form-field>
+
+    <div class="form-group">
+      <button type="submit" (click)="onsubmit()"> Löschen      </button>
+    </div>
+
+    <div class="form-group">
+      <button mat-button  routerLink="/pubuebersicht" > Zurück zur Übersicht   </button>
+    </div>

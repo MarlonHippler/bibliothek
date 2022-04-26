@@ -1,13 +1,14 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PublikationsUebersichtComponent} from "./publikationsUebersicht/publikations-uebersicht.component";
+
 import {PubAnlegenComponent} from "./pub-anlegen/pub-anlegen.component";
 import {PubAusleihenComponent} from "./pub-ausleihen/pub-ausleihen.component";
 
 import {CommonModule} from "@angular/common";
+import {PubUebersichtComponent} from "./pub-uebersicht/pub-uebersicht.component";
 
 const routes: Routes = [
-  {path: 'menu', component: PublikationsUebersichtComponent},
+  {path: 'menu', component: PubUebersichtComponent},
   {path: 'anlegen', component: PubAnlegenComponent},
   {path: 'ausleihen', component: PubAusleihenComponent}
 ];

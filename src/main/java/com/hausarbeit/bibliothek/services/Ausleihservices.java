@@ -1,6 +1,7 @@
 package com.hausarbeit.bibliothek.services;
 
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
+import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.repo.AusleihRepo;
 import com.hausarbeit.bibliothek.request.AusleihRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
 @Service
 public class Ausleihservices {
 
@@ -35,7 +38,9 @@ public class Ausleihservices {
         ausleihRepo.save(ausleihvorgang);
 
     }
-
+    public List<Ausleihvorgang> ausleihvorgangLaden(){
+        return this.ausleihRepo.findAll();
+    }
     public void zurueckgeben(){}
 
     public void verlaengern(){}

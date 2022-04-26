@@ -3,7 +3,7 @@ import {PubAnlegenModel} from "./pub-anlegen-model";
 
 export interface PubModel extends PubAnlegenModel{
 
-id: number
+pubID: number
 
 
 

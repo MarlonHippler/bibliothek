@@ -3,7 +3,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {LeihvorgangVerlaengernComponent} from './leihvorgang-verlaengern/leihvorgang-verlaengern.component' ;
 import {AppRoutingALTModule} from './app-routingALT.module';
 import {AppComponent} from './app.component';
-import {PublikationsUebersichtComponent} from './publikationsUebersicht/publikations-uebersicht.component';
 import {LeihvorgaengeUebersichtComponent} from './leihvorgaenge-uebersicht/leihvorgaenge-uebersicht.component' ;
 import {PubAusleihenComponent} from "./pub-ausleihen/pub-ausleihen.component";
 import {PubRueckgabeComponent} from "./pub-rueckgabe/pub-rueckgabe.component";
@@ -16,18 +15,24 @@ import {HttpClientModule} from "@angular/common/http";
 import {Routes} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
+import {MatTableModule, MatTextColumn} from "@angular/material/table";
+import {PubEditierenComponent} from "./pub-editieren/pub-editieren.component";
+import {PubLoeschenComponent} from "./pub-loeschen/pub-loeschen.component";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PublikationsUebersichtComponent,
+
     LeihvorgangVerlaengernComponent,
     LeihvorgaengeUebersichtComponent,
     PubAusleihenComponent,
     PubRueckgabeComponent,
     PubUebersichtComponent,
     PubAnlegenComponent,
+    PubEditierenComponent,
+    PubLoeschenComponent,
 
 
   ],
@@ -35,13 +40,21 @@ import {RouterModule} from "@angular/router";
     BrowserModule,
     AppRoutingALTModule,
     NoopAnimationsModule,
-    RouterModule.forRoot([{path: 'menu', component: PublikationsUebersichtComponent},
+    RouterModule.forRoot([{path: 'pubuebersicht', component: PubUebersichtComponent},
       {path: 'anlegen', component: PubAnlegenComponent},
-      {path: 'ausleihen', component: PubAusleihenComponent}]),
+      {path: 'ausleihen', component: PubAusleihenComponent},
+      {path: 'leihvorganguebersicht', component: LeihvorgaengeUebersichtComponent},
+      {path: 'editieren', component: PubEditierenComponent},
+      {path: 'loeschen', component: PubLoeschenComponent}
+
+    ]),
     MatInputModule,
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
+    MatTableModule,
+    MatButtonModule
+
 
 
   ],

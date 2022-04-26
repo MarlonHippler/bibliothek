@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {PubAusleihenModel} from "../models/pub-ausleihen-model";
 import {PubModel} from "../models/publikation-model";
+import {LeihvorgangModel} from "../models/leihvorgang-model";
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,26 @@ export class PubService {
 
 
   }
+
   ausleihenPub(pubAusleihenModel: PubAusleihenModel): Observable<PubAusleihenModel> {
-    return this.http.post<PubAusleihenModel>(this.pubUrl + "publikation/ausleihen", pubAusleihenModel)
+    return this.http.post<PubAusleihenModel>(this.pubUrl + "ausleihen", pubAusleihenModel)
 
 
   }
-  zeigeAllePubs():Observable<PubModel[]>  {
-    return this.http.get<PubModel[]>(this.pubUrl +"publikation/laden")
-}   //[] -> Liste erwartet
+
+  zeigeAlleAusgeliehenenPubs(): Observable<LeihvorgangModel[]> {
+    return this.http.get<LeihvorgangModel[]>(this.pubUrl + "ausleihen/leihvorgaengeLaden")
+  }
+
+  zeigeAllePubs(): Observable<PubModel[]> {
+    return this.http.get<PubModel[]>(this.pubUrl + "publikation/laden")
+  }
+
+  loeschePub(): Observable<PubModel> {
+    return this.http.delete<PubModel>(this.pubUrl + "publikationID")
+  }
+
+// bearbeitePub(): Observable<PubModel> {
+//     return this.http.put<PubModel>( this.pubUrl + "publikation/editieren")
+//}
 }
