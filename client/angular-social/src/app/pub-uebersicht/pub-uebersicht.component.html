@@ -24,6 +24,13 @@
       <button mat-button  routerLink="/editieren" > Bearbeiten</button>
     </mat-cell>
   </ng-container>
+    <ng-container matColumnDef="loeschen">
+      <mat-header-cell  *matHeaderCellDef > Löschen </mat-header-cell>
+      <mat-cell *matCellDef="let row" >
+        <button mat-button  routerLink="/loeschen" > Löschen </button>
+      </mat-cell>
+
+  </ng-container>
 
 <!--  <ng-container matColumnDef="bearbeiten">-->
 <!--    <th mat-header-cell *matHeaderCellDef> Bearbeiten </th>-->
