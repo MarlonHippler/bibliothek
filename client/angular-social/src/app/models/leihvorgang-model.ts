@@ -11,6 +11,6 @@ export interface LeihvorgangModel {
   vorname: String
   name: String
   matrikelnummer: number
-  vorgangid: number
+  vorgangID: number
 
 }

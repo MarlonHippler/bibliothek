@@ -56,20 +56,6 @@ export class PubAusleihenComponent implements OnDestroy{
 }
 
 
-// dcfkk
-//<!--   public int buch_ID;
-//public String titel;
-//@ElementCollection
-// public List<String> autor;
-// public Date veroeffentlichung;
-// public String verlag;
-// public Publikationsart publikationsart;
-// public String ISBN;
-// @ElementCollection
-// public List<String> schlagwoerter;
-// public int bestandAnzahl; -
-// }) }
 
-// ngOnInit(): void {
 
 

@@ -1,7 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Observable, Subject, subscribeOn, takeUntil} from "rxjs";
 import {PubService} from "../services/pub.service";
 import {PubModel} from "../models/publikation-model";
+import {MatSort, Sort} from '@angular/material/sort';
+import {LiveAnnouncer} from "@angular/cdk/a11y";
 
 @Component({
   selector: 'app-pub-uebersicht',
@@ -17,7 +19,7 @@ import {PubModel} from "../models/publikation-model";
 //   ISBN: string
 //   schlagwoerter: string
 //   bestandAnzahl: number
-export class PubUebersichtComponent implements OnInit , OnDestroy {
+export class PubUebersichtComponent implements OnInit, OnDestroy {
   displayedColumns: any[] = ['publikationID', 'titel', 'autor', 'veroeffentlichung', 'publikationsart',
     'verlag', 'isbn', 'schlagwoerter', 'bestandAnzahl', 'bearbeiten', 'loeschen'];
 
@@ -34,13 +36,17 @@ export class PubUebersichtComponent implements OnInit , OnDestroy {
   toLocalDateString(veroeffentlichung: string): string {
     return new Date(veroeffentlichung).toISOString().slice(0, 10);
   }
-  pubLoeschen(pubID: number) { this.pubService.loeschePub(pubID).pipe(takeUntil(this.destroy$)).subscribe()
+
+  pubLoeschen(pubID: number) {
+
+    this.pubService.loeschePub(pubID).pipe(takeUntil(this.destroy$)).subscribe()
 
 
   }
-  ngOnDestroy()
-  {
+
+  ngOnDestroy() {
     this.destroy$.next(true)
     this.destroy$.unsubscribe()
   }
+
 }

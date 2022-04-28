@@ -19,6 +19,7 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
   @Input() pubAnlegenForm: FormGroup;
   private destroy$: Subject<boolean> = new Subject<boolean>();
   pubID!: number;
+  vorgangstyp = "anlegen";
 
 
   constructor(private pubService: PubService, private route: ActivatedRoute) {
@@ -88,8 +89,9 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
     ngOnInit()
     {
       this.pubID = parseInt(this.route.snapshot.paramMap.get('id') as string);
-      console.log(this.pubID)
+
       if (this.pubID) {
+        this.vorgangstyp = "bearbeiten"
         this.pubService.zeigeEinenPub(this.pubID)
           .pipe(takeUntil(this.destroy$))
           .subscribe(pub => {

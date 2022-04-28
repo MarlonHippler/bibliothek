@@ -19,6 +19,7 @@ import {MatTableModule, MatTextColumn} from "@angular/material/table";
 
 // import {PubLoeschenComponent} from "./pub-loeschen/pub-loeschen.component";
 import {MatButtonModule} from "@angular/material/button";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -36,29 +37,29 @@ import {MatButtonModule} from "@angular/material/button";
 
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingALTModule,
-    NoopAnimationsModule,
-    RouterModule.forRoot([{path: 'pubuebersicht', component: PubUebersichtComponent},
-      {path: 'anlegen', component: PubAnlegenComponent},
-      {path: 'anlegen/:id', component: PubAnlegenComponent},
-      {path: 'ausleihen', component: PubAusleihenComponent},
-      {path: 'leihvorganguebersicht', component: LeihvorgaengeUebersichtComponent},
+    imports: [
+        BrowserModule,
+        AppRoutingALTModule,
+        NoopAnimationsModule,
+        RouterModule.forRoot([{path: 'pubuebersicht', component: PubUebersichtComponent},
+            {path: 'anlegen', component: PubAnlegenComponent},
+            {path: 'anlegen/:id', component: PubAnlegenComponent},
+            {path: 'ausleihen', component: PubAusleihenComponent},
+            {path: 'leihvorganguebersicht', component: LeihvorgaengeUebersichtComponent},
 
-      // {path: 'loeschen', component: PubLoeschenComponent}
+            // {path: 'loeschen', component: PubLoeschenComponent}
 
-    ]),
-    MatInputModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    CommonModule,
-    MatTableModule,
-    MatButtonModule
+        ]),
+        MatInputModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        CommonModule,
+        MatTableModule,
+        MatButtonModule,
+        MatSelectModule
 
 
-
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

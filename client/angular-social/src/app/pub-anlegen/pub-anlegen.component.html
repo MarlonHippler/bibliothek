@@ -26,8 +26,8 @@
   <div class="form-group">
 
     <mat-form-field>
-      <mat-label id="veroeffentlichung">Veröffentlichkeitsdatum (JJJJ-MM-TT)</mat-label>
-      <input matInput formControlName="veroeffentlichung" class="form-control">
+      <mat-label id="veroeffentlichung">Veröffentlichkeitsdatum</mat-label>
+      <input type="date" matInput formControlName="veroeffentlichung" class="form-control">
     </mat-form-field>
   </div>
 
@@ -42,9 +42,15 @@
 
   <div class="form-group">
 
-    <mat-form-field>
-      <mat-label id="publikationsart">Publikationsart</mat-label>
-      <input matInput formControlName="publikationsart" class="form-control">
+    <mat-form-field appearance="fill">
+      <mat-label>Publikationsart</mat-label>
+      <select formControlName="publikationsart" matNativeControl required>
+        <option value="Buch">Buch</option>
+        <option value="Zeitschrift">Zeitschrift</option>
+        <option value="Hausarbeit">Hausarbeit</option>
+        <option value="Bachelorarbeit">Bachelorarbeit</option>
+        <input matInput class="form-control">
+      </select>
     </mat-form-field>
 
   </div>
@@ -58,7 +64,7 @@
   <div class="form-group">
     <mat-form-field>
       <mat-label id="bestandAnzahl">Anzahl des Bestands</mat-label>
-      <input matInput formControlName="bestandAnzahl" class="form-control">
+      <input type="number" matInput formControlName="bestandAnzahl" class="form-control">
     </mat-form-field>
 
   </div>
@@ -71,7 +77,7 @@
   </div>
   <br>
   <div class="form-group">
-    <button  type="submit" (click)="onsubmit()">Anlegen
+    <button  type="submit" (click)="onsubmit()">{{vorgangstyp}}
     </button>
   </div>
 

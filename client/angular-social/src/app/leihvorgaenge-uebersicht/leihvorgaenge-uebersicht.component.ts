@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';import {Observable} from "rxjs";
+import { Component, OnInit } from '@angular/core';import {Observable, Subject, takeUntil} from "rxjs";
 import {PubService} from "../services/pub.service";
 import {LeihvorgangModel} from "../models/leihvorgang-model";
+import {LeihvorgangService} from "../services/leihvorgang.service";
 
 
 @Component({
@@ -20,11 +21,12 @@ import {LeihvorgangModel} from "../models/leihvorgang-model";
 
 export class LeihvorgaengeUebersichtComponent implements OnInit {
   displayedColumns: string[] = ['vorgangID','pubID', 'vorname', 'name', 'matrikelnummer', 'ausgabedatum',
-    'rueckgabedatum'];
+    'rueckgabedatum', 'leihfristVerlaengern'];
 
   public dataSource!: Observable<LeihvorgangModel[]>;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private pubService: PubService) {
+  constructor(private leihvorgangService: LeihvorgangService, private pubService: PubService) {
   } // service reingeben
 
   ngOnInit(): void {
@@ -32,6 +34,12 @@ export class LeihvorgaengeUebersichtComponent implements OnInit {
   }
 
   toLocalDateString(veroeffentlichung: string): string {
-    return new Date(veroeffentlichung).toUTCString()
+    return new Date(veroeffentlichung).toISOString().slice(0, 10);
+  }
+  leihvorgangVerlaengern(leihvorgangModel: LeihvorgangModel) {
+    console.log(leihvorgangModel.vorgangID)
+    this.leihvorgangService.verlaengereLeihvorgang(leihvorgangModel).pipe(takeUntil(this.destroy$)).subscribe()
+
+
   }
 }

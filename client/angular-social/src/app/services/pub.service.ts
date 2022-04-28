@@ -45,10 +45,10 @@ export class PubService {
   }
 
   loeschePub(pubID: number): Observable<PubModel> {
-    return this.http.delete<PubModel>(this.pubUrl + "publikation/loeschen/{publikationID}")
+    return this.http.delete<PubModel>(this.pubUrl + "publikation/loeschen/" + pubID)
   }
 
 bearbeitePub(pub: PubModel): Observable<PubModel> {
-    return this.http.put<PubModel>( this.pubUrl + "publikation/editieren", pub)
+    return this.http.put<PubModel>( this.pubUrl + "publikation/update/"+ pub.pubID, pub)
 }
 }

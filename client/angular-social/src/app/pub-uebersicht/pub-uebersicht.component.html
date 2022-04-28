@@ -1,6 +1,6 @@
 <h1>Übersicht der verwalteten Publikationen</h1>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event) class="mat-elevation-z8">
 
 
   <mat-text-column headerText="ID" name="publikationID"></mat-text-column>
@@ -19,17 +19,22 @@
   <mat-text-column headerText="Art der Publikation" name="publikationsart"></mat-text-column>
 
   <ng-container matColumnDef="bearbeiten">
+
     <mat-header-cell *matHeaderCellDef> Bearbeiten</mat-header-cell>
     <mat-cell *matCellDef="let row">
       <button mat-button [routerLink]="['/anlegen/', row.publikationID ]"> Bearbeiten</button>
     </mat-cell>
+
   </ng-container>
 
   <ng-container matColumnDef="loeschen">
+    <div>
     <mat-header-cell *matHeaderCellDef> Löschen</mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <button mat-button (click)="pubLoeschen(row.pubID)")> Löschen</button>
+      <button mat-button (click)="pubLoeschen(row.publikationID)" > Löschen</button>
+
     </mat-cell>
+    </div>
 
   </ng-container>
 
