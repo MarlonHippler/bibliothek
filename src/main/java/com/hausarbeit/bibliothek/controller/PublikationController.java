@@ -1,18 +1,11 @@
 package com.hausarbeit.bibliothek.controller;
 
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.hausarbeit.bibliothek.exception.InvalidExceptionPublikation;
-import com.hausarbeit.bibliothek.exception.NeueException;
-import com.hausarbeit.bibliothek.exception.PublikationException;
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.request.PublikationRequest;
 import com.hausarbeit.bibliothek.services.Publikationservices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 

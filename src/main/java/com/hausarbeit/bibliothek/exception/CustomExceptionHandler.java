@@ -22,13 +22,4 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(bibliothekException, badRequest);
     }
 
-    @ExceptionHandler(InvalidExceptionPublikation.class)
-    public ResponseEntity<Object> processJsonInvalidFormatException(InvalidExceptionPublikation e) {
-        HttpStatus badRequest = HttpStatus.BAD_REQUEST;
-        NeueException neueException = new NeueException(
-                e.getMessage(),
-                e.getHttpInputMessage(),
-                e.getCause());
-        return new ResponseEntity<>(neueException, badRequest);
-    }
 }
