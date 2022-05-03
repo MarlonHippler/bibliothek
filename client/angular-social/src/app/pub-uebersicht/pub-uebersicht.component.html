@@ -1,22 +1,52 @@
 <h1>Übersicht der verwalteten Publikationen</h1>
 
-<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event) class="mat-elevation-z8">
+<mat-form-field id="filter" *ngIf="publikations">
+  <input matInput (keyup)="suchen($any($event.target).value)" [value]="publikations.filter">
+</mat-form-field>
 
+<table mat-table [dataSource]="publikations" matSort class="mat-elevation-z8">
 
-  <mat-text-column headerText="ID" name="publikationID"></mat-text-column>
-  <mat-text-column headerText="Titel" name="titel"></mat-text-column>
-  <mat-text-column headerText="Autor" name="autor"></mat-text-column>
-  <mat-text-column headerText="ISBN" name="isbn"></mat-text-column>
-  <mat-text-column headerText="Verlag" name="verlag"></mat-text-column>
+  <ng-container matColumnDef="publikationID">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td mat-cell *matCellDef="let item"> {{item.publikationID}} </td>
+
+  </ng-container>
+  <ng-container matColumnDef="titel">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Titel</th>
+    <td mat-cell *matCellDef="let item"> {{(item.titel)}} </td>
+  </ng-container>
+  <ng-container matColumnDef="autor">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Autor</th>
+    <td mat-cell *matCellDef="let item"> {{(item.autor)}} </td>
+  </ng-container>
+  <ng-container matColumnDef="isbn">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ISBN</th>
+    <td mat-cell *matCellDef="let item"> {{(item.ISBN)}} </td>
+  </ng-container>
+  <ng-container matColumnDef="verlag">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Verlag</th>
+    <td mat-cell *matCellDef="let item"> {{(item.verlag)}} </td>
+  </ng-container>
+
 
   <ng-container matColumnDef="veroeffentlichung">
-    <th mat-header-cell *matHeaderCellDef> Veröffentlichkeitsdatum</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Veröffentlichkeitsdatum</th>
     <td mat-cell *matCellDef="let item"> {{toLocalDateString(item.veroeffentlichung)}} </td>
 
   </ng-container>
-  <mat-text-column headerText="Schlagwörter" name="schlagwoerter"></mat-text-column>
-  <mat-text-column headerText="Anzahl im Bestand " name="bestandAnzahl"></mat-text-column>
-  <mat-text-column headerText="Art der Publikation" name="publikationsart"></mat-text-column>
+  <ng-container matColumnDef="schlagwoerter">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Schlagwörter</th>
+    <td mat-cell *matCellDef="let item"> {{(item.schlagwoerter)}} </td>
+  </ng-container>
+  <ng-container matColumnDef="bestandAnzahl">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Anzahl im Bestand</th>
+    <td mat-cell *matCellDef="let item"> {{(item.bestandAnzahl)}} </td>
+  </ng-container>
+  <ng-container matColumnDef="publikationsart">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Art der Publikation</th>
+    <td mat-cell *matCellDef="let item"> {{(item.publikationsart)}} </td>
+  </ng-container>
+
 
   <ng-container matColumnDef="bearbeiten">
 
@@ -29,11 +59,11 @@
 
   <ng-container matColumnDef="loeschen">
     <div>
-    <mat-header-cell *matHeaderCellDef> Löschen</mat-header-cell>
-    <mat-cell *matCellDef="let row">
-      <button mat-button (click)="pubLoeschen(row.publikationID)" > Löschen</button>
+      <mat-header-cell *matHeaderCellDef> Löschen</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button (click)="pubLoeschen(row.publikationID)"> Löschen</button>
 
-    </mat-cell>
+      </mat-cell>
     </div>
 
   </ng-container>

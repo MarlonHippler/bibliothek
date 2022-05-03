@@ -72,8 +72,16 @@
 
     <mat-form-field>
       <mat-label id="schlagwoerter">Schlagwörter</mat-label>
-      <input matInput formControlName="schlagwoerter" class="form-control">
+      <mat-label>Publikationsart</mat-label>
+      <select (change)="schlagwoerterHinzufuegen($any($event.target).value)" matNativeControl required>
+        <option value="Roman">Roman</option>
+        <option value="Wissenschaft">Wissenschaft</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Geschichte">Geschichte</option>
+        <input matInput class="form-control">
+      </select>
     </mat-form-field>
+
   </div>
   <br>
   <div class="form-group">

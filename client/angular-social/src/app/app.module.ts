@@ -20,6 +20,8 @@ import {MatTableModule, MatTextColumn} from "@angular/material/table";
 // import {PubLoeschenComponent} from "./pub-loeschen/pub-loeschen.component";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSelectModule} from "@angular/material/select";
+import {MatSortModule} from "@angular/material/sort";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 @NgModule({
@@ -37,29 +39,31 @@ import {MatSelectModule} from "@angular/material/select";
 
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingALTModule,
-        NoopAnimationsModule,
-        RouterModule.forRoot([{path: 'pubuebersicht', component: PubUebersichtComponent},
-            {path: 'anlegen', component: PubAnlegenComponent},
-            {path: 'anlegen/:id', component: PubAnlegenComponent},
-            {path: 'ausleihen', component: PubAusleihenComponent},
-            {path: 'leihvorganguebersicht', component: LeihvorgaengeUebersichtComponent},
+  imports: [
+    BrowserModule,
+    AppRoutingALTModule,
+    NoopAnimationsModule,
+    RouterModule.forRoot([{path: 'pubuebersicht', component: PubUebersichtComponent},
+      {path: 'anlegen', component: PubAnlegenComponent},
+      {path: 'anlegen/:id', component: PubAnlegenComponent},
+      {path: 'ausleihen', component: PubAusleihenComponent},
+      {path: 'leihvorganguebersicht', component: LeihvorgaengeUebersichtComponent},
 
-            // {path: 'loeschen', component: PubLoeschenComponent}
+      // {path: 'loeschen', component: PubLoeschenComponent}
 
-        ]),
-        MatInputModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        CommonModule,
-        MatTableModule,
-        MatButtonModule,
-        MatSelectModule
+    ]),
+    MatInputModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    CommonModule,
+    MatTableModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatSortModule,
+    MatSnackBarModule,
 
 
-    ],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
