@@ -1,6 +1,8 @@
 package com.hausarbeit.bibliothek.model;
 
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.persistence.*;
 import java.io.Serializable;import java.util.Date;
 

@@ -1,5 +1,6 @@
 package com.hausarbeit.bibliothek.services;
 
+import com.hausarbeit.bibliothek.exception.PublikationException;
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.repo.AusleihRepo;
@@ -29,7 +30,7 @@ public class Ausleihservices {
         Publikation publikation = publikationRepo.findPublikationByPublikationID(ausleihRequest.getPubID());
         Integer Bestandsanzahl = publikation.getBestandAnzahl();
         if(Bestandsanzahl<1){
-            throw new IllegalArgumentException("Es sind nicht mehr genügend Exemplare verfügbar");
+            throw new PublikationException("Es sind nicht mehr genügend Exemplare verfügbar");
         } else {
             Ausleihvorgang ausleihvorgang = new Ausleihvorgang();
             ausleihvorgang.setMatrikelnummer(ausleihRequest.getMatrikelnummer());
@@ -58,15 +59,9 @@ public class Ausleihservices {
     }
 
     public Ausleihvorgang ausleihvorgangLaden(Long vorgangID) {
-        if (vorgangID == null) {
-            throw new IllegalArgumentException("Vorgang-ID ist notwendig!");}
-        Ausleihvorgang ausleihvorgang;
-        try {
-            ausleihvorgang = this.ausleihRepo.findAusleihvorgangByVorgangID(vorgangID);
-        } catch (EntityNotFoundException e) {
-            throw new EntityNotFoundException(e.getMessage());
 
-        }
+        Ausleihvorgang ausleihvorgang;
+        ausleihvorgang = this.ausleihRepo.findAusleihvorgangByVorgangID(vorgangID);
         return ausleihvorgang;
     }
 
@@ -88,7 +83,7 @@ public class Ausleihservices {
         Ausleihvorgang ausleihvorgang = ausleihRepo.findAusleihvorgangByVorgangID(vorgangID);
         int counter = ausleihvorgang.getAusleihCounter();
         if (counter>1){
-            throw new IllegalArgumentException("Maximale Anzahl von Verlängerungen erreicht");
+            throw new PublikationException("Maximale Anzahl von Verlängerungen erreicht");
         } else {
             counter ++;
             Calendar calendar = Calendar.getInstance();
