@@ -31,11 +31,7 @@ public class PublikationController {
 
     @PostMapping("publikation/anlegen")
     public void publikationAnlegen(@RequestBody PublikationRequest request){
-               try {
                    publikationservice.publikationAnlegen(request);
-               }catch(Exception e){
-                   throw new PublikationException("2Die Felder Titel und Bestandsanzahl müssen ausgefüllt sein");
-               }
     }
 
     @GetMapping("publikation/alleLaden")
