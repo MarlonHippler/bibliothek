@@ -9,7 +9,6 @@ import com.hausarbeit.bibliothek.request.AusleihRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +36,7 @@ public class Ausleihservices {
             ausleihvorgang.setName(ausleihRequest.getName());
             ausleihvorgang.setVorname(ausleihRequest.getVorname());
             ausleihvorgang.setPubID(ausleihRequest.getPubID());
+            ausleihvorgang.setPubTitel(publikation.getTitel());
             ausleihvorgang.setAusleihCounter(0);
             Calendar calendar = Calendar.getInstance();
             Date ausgabedatum = calendar.getTime();

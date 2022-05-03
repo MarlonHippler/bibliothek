@@ -42,7 +42,6 @@ public class Publikationservices {
                 throw new PublikationException("ISBN Format falsch");
             }
             }
-
             Publikation publikation = new Publikation();
             publikation.setTitel(request.getTitel());
             publikation.setPublikationsart(request.getPublikationsart());

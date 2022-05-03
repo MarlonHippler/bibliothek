@@ -43,6 +43,7 @@ public class Ausleihvorgang implements Serializable {
             allocationSize = 1
     )
     public Long vorgangID;
+    public String pubTitel;
     public Date ausgabedatum;
     public Date rueckgabedatum;
     public static int ausleihzeitraum = 14;
@@ -122,5 +123,13 @@ public class Ausleihvorgang implements Serializable {
 
     public void setMatrikelnummer(int matrikelnummer) {
         this.matrikelnummer = matrikelnummer;
+    }
+
+    public String getPubTitel() {
+        return pubTitel;
+    }
+
+    public void setPubTitel(String pubTitel) {
+        this.pubTitel = pubTitel;
     }
 }
