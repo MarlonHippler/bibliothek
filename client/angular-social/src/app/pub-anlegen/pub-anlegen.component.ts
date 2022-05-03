@@ -1,11 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Input} from "@angular/core";
 import {PubService} from "../services/pub.service";
 import {PubAnlegenModel} from "../models/pub-anlegen-model";
 import {Subject, takeUntil} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {PubModel} from "../models/publikation-model";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatTableDataSource} from "@angular/material/table";
 
 
 @Component({
@@ -22,7 +24,7 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
   vorgangstyp = "anlegen";
 
 
-  constructor(private pubService: PubService, private route: ActivatedRoute) {
+  constructor(private pubService: PubService, private route: ActivatedRoute, private snackBar: MatSnackBar) {
     this.pubAnlegenForm = new FormGroup({
       titel: new FormControl('', Validators.required),
       autor: new FormControl('', Validators.required),
@@ -30,7 +32,7 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
       verlag: new FormControl(''),
       publikationsart: new FormControl(''),
       ISBN: new FormControl(''),
-      schlagwoerter: new FormControl(''), // in Zukunft FormArray,
+      schlagwoerter: new FormArray( []),
       bestandAnzahl: new FormControl('')
 
     })
@@ -59,26 +61,36 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
           schlagwoerter: this.pubAnlegenForm.get('schlagwoerter')?.value,
           bestandAnzahl: this.pubAnlegenForm.get('bestandAnzahl')?.value,
         } as PubModel
-          this.pubService.bearbeitePub(pubUpdate).pipe(takeUntil(this.destroy$)).subscribe()
-        } else {let pub = {
-        titel: this.pubAnlegenForm.get('titel')?.value,
-        autor: this.pubAnlegenForm.get('autor')?.value,
-        veroeffentlichung: this.pubAnlegenForm.get('veroeffentlichung')?.value,
-        verlag: this.pubAnlegenForm.get('verlag')?.value,
-        publikationsart: this.pubAnlegenForm.get('publikationsart')?.value,
+          this.pubService.bearbeitePub(pubUpdate).pipe(takeUntil(this.destroy$)).subscribe(
+          )
+        } else {
+        let pub = {
+          titel: this.pubAnlegenForm.get('titel')?.value,
+          autor: this.pubAnlegenForm.get('autor')?.value,
+          veroeffentlichung: this.pubAnlegenForm.get('veroeffentlichung')?.value,
+          verlag: this.pubAnlegenForm.get('verlag')?.value,
+          publikationsart: this.pubAnlegenForm.get('publikationsart')?.value,
 
-        ISBN: this.pubAnlegenForm.get('ISBN')?.value,
-        schlagwoerter: this.pubAnlegenForm.get('schlagwoerter')?.value,
-        bestandAnzahl: this.pubAnlegenForm.get('bestandAnzahl')?.value,
+          ISBN: this.pubAnlegenForm.get('ISBN')?.value,
+          // schlagwoerter: this.pubAnlegenForm.get('schlagwoerter')?.value,
+          bestandAnzahl: this.pubAnlegenForm.get('bestandAnzahl')?.value,
 
-      } as PubAnlegenModel
-        this.pubService.erstellePub(pub).pipe(takeUntil(this.destroy$)).subscribe()}
+        } as PubAnlegenModel
+        this.pubService.erstellePub(pub).pipe(takeUntil(this.destroy$)).subscribe(
+          publikation => {
+          },
+          error => {
+            if (error.error) {
+              this.openSnackBar(error.error.nachricht)
+            }
+          })
+      }}}
 
 
-      }
 
 
-    }
+
+
 
     ngOnDestroy()
     {
@@ -111,7 +123,21 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
 
 
     }
+schlagwoerterHinzufuegen(schlagwort: string){
+    console.log(schlagwort)
+    let schlagwortArray = this.pubAnlegenForm.get('schlagwoerter') as FormArray;
+    schlagwortArray.push(new FormControl(schlagwort))
+
+}
+
+  openSnackBar(nachricht: string): void {
+    this.snackBar.open(nachricht, 'X', {
+      duration: 5000
+    })
   }
+
+
+}
 
 
 
