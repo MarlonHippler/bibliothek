@@ -15,6 +15,7 @@ public class Ausleihvorgang implements Serializable {
     }
 
     public Ausleihvorgang (Date ausgabedatum,
+                           String pubTitel,
                            Date rueckgabedatum,
                            int ausleihzeitraum,
                            int ausleihCounter,
@@ -27,6 +28,7 @@ public class Ausleihvorgang implements Serializable {
         this.ausleihzeitraum = ausleihzeitraum;
         this.ausleihCounter = ausleihCounter;
         this.pubID = pubID;
+        this.pubTitel = pubTitel;
         this.name = name;
         this.vorname = vorname;
         this.matrikelnummer = matrikelnummer;}
