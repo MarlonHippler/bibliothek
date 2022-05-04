@@ -29,8 +29,21 @@ public class BibliothekApplication {
 	CommandLineRunner commandLineRunner(PublikationRepo publikationrepo, AusleihRepo ausleihRepo) {
 		return args -> {
 			SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
-			String datumStringBuch = "1998-01-01";
-			Date buchdatum= dt.parse(datumStringBuch);
+			String datumStringBuch1 = "1997-01-01";
+			String datumStringBuch2 = "1998-01-01";
+			String datumStringBuch3 = "1999-01-01";
+			String datumStringBuch4 = "2000-01-01";
+			String datumStringBuch5 = "2003-01-01";
+			String datumStringBuch6 = "2005-01-01";
+			String datumStringBuch7 = "2007-01-01";
+			Date buchdatum1 = dt.parse(datumStringBuch1);
+			Date buchdatum2 = dt.parse(datumStringBuch2);
+			Date buchdatum3 = dt.parse(datumStringBuch3);
+			Date buchdatum4 = dt.parse(datumStringBuch4);
+			Date buchdatum5 = dt.parse(datumStringBuch5);
+			Date buchdatum6 = dt.parse(datumStringBuch6);
+			Date buchdatum7 = dt.parse(datumStringBuch7);
+			Date buchdatum8 = dt.parse(datumStringBuch7);
 			String datumStringAusgabe = "2022-05-03";
 			String datumStringRueckgabe= "2022-05-17";
 			Date ausgabe1 = dt.parse(datumStringAusgabe);
@@ -38,13 +51,74 @@ public class BibliothekApplication {
 
 			Publikation harryPotter1 = new Publikation("Harry Potter und der Stein der Weisen",
 					"J.K.Rowling",
-					buchdatum,
+					buchdatum1,
 					"randomVerlag",
 					"Buch",
-					"978-3551551672",
+					"3-551-55167-7",
 					"schlagwort",
-					5);
+					3);
 			publikationrepo.save(harryPotter1);
+			
+			Publikation harryPotter2 = new Publikation("Harry Potter und die Kammer des Schreckens",
+					"J.K.Rowling",
+					buchdatum2,
+					"randomVerlag",
+					"Buch",
+					"3-551-55168-5",
+					"schlagwort",
+					53);
+			publikationrepo.save(harryPotter2);
+			
+			Publikation harryPotter3 = new Publikation("Harry Potter und der Gefangene von Askaban",
+					"J.K.Rowling",
+					buchdatum3,
+					"randomVerlag",
+					"Buch",
+					"3-551-55169-3",
+					"schlagwort",
+					1);
+			publikationrepo.save(harryPotter3);
+			
+			Publikation harryPotter4 = new Publikation("Harry Potter und der Feuerkelch",
+					"J.K.Rowling",
+					buchdatum4,
+					"randomVerlag",
+					"Buch",
+					"3-551-55193-6",
+					"schlagwort",
+					2);
+			publikationrepo.save(harryPotter4);
+			
+			Publikation harryPotter5 = new Publikation("Harry Potter und der Orden des Phönix",
+					"J.K.Rowling",
+					buchdatum5,
+					"randomVerlag",
+					"Buch",
+					"3-551-55555-9",
+					"schlagwort",
+					17);
+			publikationrepo.save(harryPotter5);
+			
+			Publikation harryPotter6 = new Publikation("Harry Potter und der Halbblutprinz",
+					"J.K.Rowling",
+					buchdatum6,
+					"randomVerlag",
+					"Buch",
+					"3-551-56666-6",
+					"schlagwort",
+					8);
+			publikationrepo.save(harryPotter6);
+			
+			Publikation harryPotter7 = new Publikation("Harry Potter und die Heiligtümer des Todes",
+					"J.K.Rowling",
+					buchdatum7,
+					"randomVerlag",
+					"Buch",
+					"3-551-57777-3",
+					"schlagwort",
+					100);
+			publikationrepo.save(harryPotter7);
+			
 			Long pubID = 1L;
 			Ausleihvorgang vorgang = new Ausleihvorgang(ausgabe1,"Harry Potter und der Stein der Weisen",rueckgabe1,14,2,pubID,"Rowling","J.K",12314);
 			ausleihRepo.save(vorgang);
