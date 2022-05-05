@@ -72,7 +72,7 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
           publikationsart: this.pubAnlegenForm.get('publikationsart')?.value,
 
           ISBN: this.pubAnlegenForm.get('ISBN')?.value,
-          // schlagwoerter: this.pubAnlegenForm.get('schlagwoerter')?.value,
+          schlagwoerter: this.pubAnlegenForm.get('schlagwoerter')?.value,
           bestandAnzahl: this.pubAnlegenForm.get('bestandAnzahl')?.value,
 
         } as PubAnlegenModel

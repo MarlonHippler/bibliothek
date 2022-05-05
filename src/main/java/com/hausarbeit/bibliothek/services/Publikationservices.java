@@ -3,13 +3,18 @@ package com.hausarbeit.bibliothek.services;
 import com.hausarbeit.bibliothek.exception.RequestBibliothekException;
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
+import com.hausarbeit.bibliothek.model.Schlagwoerter;
 import com.hausarbeit.bibliothek.repo.AusleihRepo;
 import com.hausarbeit.bibliothek.repo.PublikationRepo;
+import com.hausarbeit.bibliothek.repo.SchlagwortRepo;
 import com.hausarbeit.bibliothek.request.PublikationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,11 +26,13 @@ public class Publikationservices {
 
     private PublikationRepo publikationRepo;
     private AusleihRepo ausleihRepo;
+    private SchlagwortRepo schlagwortRepo;
 
     @Autowired
-    public Publikationservices(PublikationRepo publikationRepo, AusleihRepo ausleihRepo) {
+    public Publikationservices(PublikationRepo publikationRepo, AusleihRepo ausleihRepo,SchlagwortRepo schlagwortRepo) {
         this.publikationRepo = publikationRepo;
         this.ausleihRepo = ausleihRepo;
+        this.schlagwortRepo =schlagwortRepo;
     }
 
     /**
@@ -51,9 +58,20 @@ public class Publikationservices {
             publikation.setISBN(request.getISBN());
             publikation.setBestandAnzahl(request.getBestandAnzahl());
             publikation.setVerlag(request.getVerlag());
-            publikation.setSchlagwoerter(request.getSchlagwoerter());
             publikation.setVeroeffentlichung(request.getVeroeffentlichung());
+            publikation.schlagwoerter = new ArrayList<Schlagwoerter>();
+            String[] schlagwoerter = request.getSchlagwoerter();
+            int laenge = schlagwoerter.length;
+            while (laenge > 0){
+                int arrayStelle = laenge-1;
+                String schlagwortString = schlagwoerter[arrayStelle];
+                Long id = schlagwortRepo.findBySchlagwort(schlagwortString);
+                Schlagwoerter schlagwort = schlagwortRepo.findSchlagwoerterBySchlagwoerterID(id);
+                publikation.schlagwörterZuweisen(schlagwort);
+                laenge = laenge-1;
+            }
             publikationRepo.save(publikation);
+
         }
     }
 
@@ -76,6 +94,7 @@ public class Publikationservices {
         publikationneu.setSchlagwoerter(request.getSchlagwoerter());
         publikationneu.setVeroeffentlichung(request.getVeroeffentlichung());
         publikationRepo.save(publikationneu);
+
     }
 
     /**
@@ -126,6 +145,12 @@ public class Publikationservices {
     }
 
 
+    public void verbindungSuP(Long schlagwoerterID, Long publikationID) {
+        Schlagwoerter schlagwort = schlagwortRepo.getById(schlagwoerterID);
+        Publikation publikation = publikationRepo.getById(publikationID);
+        schlagwort.publikationZuweisen(publikation);
+        schlagwortRepo.save(schlagwort);
+    }
 }
 
 

@@ -1,10 +1,15 @@
 package com.hausarbeit.bibliothek.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
-import java.io.Serializable;import java.util.Date;
+import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Enthält das Model für eine Publikation
@@ -26,7 +31,7 @@ public class Publikation implements Serializable {
                         String verlag,
                         String publikationsart,
                         String ISBN,
-                        String schlagwoerter,
+                        List<Schlagwoerter> schlagwoerter,
                         int bestandAnzahl )
     { this.titel = titel;
     this.autor= autor;
@@ -51,8 +56,18 @@ public class Publikation implements Serializable {
     public String verlag;
     public String publikationsart;
     public String ISBN;
-    public String schlagwoerter;
+    @ManyToMany
+    @JoinTable(
+            name = "SchlagwoerterPublikation",
+            joinColumns = @JoinColumn(name= "publikation_id"),
+            inverseJoinColumns = @JoinColumn(name="schlagwoerter_id")
+    )
+    public List<Schlagwoerter> schlagwoerter;
     public Integer bestandAnzahl;
+
+    public void schlagwörterZuweisen(Schlagwoerter schlagwort) {
+        schlagwoerter.add(schlagwort);
+    }
 
 
     public Long getPublikationID() {
@@ -83,7 +98,7 @@ public class Publikation implements Serializable {
         return ISBN;
     }
 
-    public String getSchlagwoerter() {
+    public List<Schlagwoerter> getSchlagwoerter() {
         return schlagwoerter;
     }
 
@@ -119,7 +134,7 @@ public class Publikation implements Serializable {
         this.ISBN = ISBN;
     }
 
-    public void setSchlagwoerter(String schlagwoerter) {
+    public void setSchlagwoerter(List<Schlagwoerter> schlagwoerter) {
         this.schlagwoerter = schlagwoerter;
     }
 

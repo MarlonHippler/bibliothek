@@ -2,6 +2,7 @@ package com.hausarbeit.bibliothek.controller;
 
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
+import com.hausarbeit.bibliothek.model.Schlagwoerter;
 import com.hausarbeit.bibliothek.request.PublikationRequest;
 import com.hausarbeit.bibliothek.services.Publikationservices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,14 @@ public class PublikationController {
     @GetMapping("publikation/ausleihvorgaenge/{publikationID}")
     public List<Ausleihvorgang> zugehoerigeAusleihvorgaenge(@PathVariable Long publikationID){
         return publikationservice.zugehoerigeAusleihvorgaenge(publikationID);
+    }
+
+    @PutMapping("/{schlagwoerterID}/Publikation/{publikationID}")
+    public void verbindungSuP(
+            @PathVariable Long schlagwoerterID,
+            @PathVariable Long publikationID
+    ){
+        publikationservice.verbindungSuP(schlagwoerterID,publikationID);
     }
 
 
