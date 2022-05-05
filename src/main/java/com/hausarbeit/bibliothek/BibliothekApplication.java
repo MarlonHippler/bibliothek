@@ -7,7 +7,9 @@ import com.hausarbeit.bibliothek.repo.AusleihRepo;
 import com.hausarbeit.bibliothek.repo.PublikationRepo;
 import com.hausarbeit.bibliothek.repo.SchlagwortRepo;
 import com.hausarbeit.bibliothek.request.AusleihRequest;
+import com.hausarbeit.bibliothek.request.PublikationRequest;
 import com.hausarbeit.bibliothek.services.Ausleihservices;
+import com.hausarbeit.bibliothek.services.Publikationservices;
 import com.hausarbeit.bibliothek.services.UtilityService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,9 +31,11 @@ public class BibliothekApplication {
 
 		}
 	@Bean
-	CommandLineRunner commandLineRunner(PublikationRepo publikationrepo, AusleihRepo ausleihRepo, SchlagwortRepo schlagwortRepo) {
+	CommandLineRunner commandLineRunner(PublikationRepo publikationrepo,
+										AusleihRepo ausleihRepo,
+										SchlagwortRepo schlagwortRepo,
+										Publikationservices publikationservices) {
 		return args -> {
-
 			Schlagwoerter schlagwort1 = new Schlagwoerter("Wissenschaft");
 			Schlagwoerter schlagwort2 = new Schlagwoerter("Fantasy");
 			Schlagwoerter schlagwort3 = new Schlagwoerter("Roman");
