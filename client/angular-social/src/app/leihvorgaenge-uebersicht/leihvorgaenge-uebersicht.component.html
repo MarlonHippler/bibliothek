@@ -1,24 +1,36 @@
 <h1>Übersicht der verwalteten Ausleihvorgänge</h1>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" matSort class ="mat-elevation-z8">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-<!--  displayedColumns: string[] = ['vorgang_ID','publikationID', 'vorname', 'name', 'matrikelnummer', 'ausgabedatum',-->
-<!--  'rueckgabedatum'];-->
-  <!-- Position Column -->
-  <mat-text-column headerText = "Vorgangs ID" name="vorgangID"></mat-text-column>
-  <mat-text-column headerText = "Publikations ID" name="pubID"></mat-text-column>
-  <mat-text-column headerText = "Vorname" name="vorname"></mat-text-column>
-  <mat-text-column headerText = "Nachname" name="name"></mat-text-column>
-  <mat-text-column headerText = "Matrikelnummer" name="matrikelnummer"></mat-text-column>
+
+
+  <ng-container matColumnDef="vorgangID">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Vorgangsnummer</th>
+    <td mat-cell *matCellDef="let item"> {{item.vorgangID}} </td>
+  </ng-container>
+  <ng-container matColumnDef="pubID">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Publikations ID</th>
+    <td mat-cell *matCellDef="let item"> {{item.pubID}} </td>
+  </ng-container>
+  <ng-container matColumnDef="vorname">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Vorname</th>
+    <td mat-cell *matCellDef="let item"> {{item.vorname}} </td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nachname</th>
+    <td mat-cell *matCellDef="let item"> {{item.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="matrikelnummer">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Matrikelnummer</th>
+    <td mat-cell *matCellDef="let item"> {{item.matrikelnummer}} </td>
+  </ng-container>
 
   <ng-container matColumnDef="ausgabedatum">
-    <th mat-header-cell *matHeaderCellDef> Ausgabedatum </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ausgabedatum </th>
     <td mat-cell *matCellDef="let item"> {{toLocalDateString(item.ausgabedatum)}} </td>
   </ng-container>
     <ng-container matColumnDef="rueckgabedatum">
-      <th mat-header-cell *matHeaderCellDef> Rückgabedatum </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Rückgabedatum </th>
       <td mat-cell *matCellDef="let item"> {{toLocalDateString(item.rueckgabedatum)}} </td>
   </ng-container>
   <ng-container matColumnDef="leihfristVerlaengern">

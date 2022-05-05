@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';import {Observable, Subject, takeUntil} from "rxjs";
+import {Component, OnInit, ViewChild} from '@angular/core';import {Observable, Subject, takeUntil} from "rxjs";
 import {PubService} from "../services/pub.service";
 import {LeihvorgangModel} from "../models/leihvorgang-model";
 import {LeihvorgangService} from "../services/leihvorgang.service";
+import {MatSort} from "@angular/material/sort";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 
 @Component({
@@ -25,8 +27,9 @@ export class LeihvorgaengeUebersichtComponent implements OnInit {
 
   public dataSource!: Observable<LeihvorgangModel[]>;
   private destroy$: Subject<boolean> = new Subject<boolean>();
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
 
-  constructor(private leihvorgangService: LeihvorgangService, private pubService: PubService) {
+  constructor(private leihvorgangService: LeihvorgangService, private pubService: PubService, private snackBar: MatSnackBar) {
   } // service reingeben
 
   ngOnInit(): void {
@@ -41,5 +44,10 @@ export class LeihvorgaengeUebersichtComponent implements OnInit {
     this.leihvorgangService.verlaengereLeihvorgang(leihvorgangModel).pipe(takeUntil(this.destroy$)).subscribe()
 
 
+  }
+  openSnackBar(message: string): void {
+    this.snackBar.open(message, 'X', {
+      duration: 5000
+    })
   }
 }
