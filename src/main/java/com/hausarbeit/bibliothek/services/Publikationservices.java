@@ -45,7 +45,8 @@ public class Publikationservices {
         if (request.getBestandAnzahl() < 1){
             throw new RequestBibliothekException("Die Bestandsanzahl muss größer als null sein.");
         } else {
-            if(request.getISBN() != null){
+            System.out.println(request.getISBN());
+            if(request.getISBN() != ""){
             UtilityService utilityService = new UtilityService();
             boolean check = utilityService.checkISBN(request.getISBN());
             if (check == false) {
