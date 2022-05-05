@@ -2,6 +2,7 @@ package com.hausarbeit.bibliothek.controller;
 
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
+import com.hausarbeit.bibliothek.model.PublikationMitSchlagwort;
 import com.hausarbeit.bibliothek.model.Schlagwoerter;
 import com.hausarbeit.bibliothek.request.PublikationRequest;
 import com.hausarbeit.bibliothek.services.Publikationservices;
@@ -41,7 +42,7 @@ public class PublikationController {
      * @return
      */
     @GetMapping("publikation/alleLaden")
-    public List<Publikation> publikationenLaden() {
+    public List<PublikationMitSchlagwort> publikationenLaden() {
         return publikationservice.publikationenLaden();
     }
 
@@ -67,11 +68,11 @@ public class PublikationController {
     /**
      * Updaten einer Publikation
      * @param publikationID
-     * @param publikation
+     * @param request
      */
     @PutMapping("publikation/update/{publikationID}")
-    public void publikationUpdate(@PathVariable Long publikationID, @RequestBody Publikation publikation){
-            publikationservice.publikationUpdaten(publikationID,publikation);
+    public void publikationUpdate(@PathVariable Long publikationID, @RequestBody PublikationRequest request){
+            publikationservice.publikationUpdaten(publikationID,request);
     }
 
     /**

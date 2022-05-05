@@ -3,6 +3,7 @@ package com.hausarbeit.bibliothek.services;
 import com.hausarbeit.bibliothek.exception.RequestBibliothekException;
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
+import com.hausarbeit.bibliothek.model.PublikationMitSchlagwort;
 import com.hausarbeit.bibliothek.model.Schlagwoerter;
 import com.hausarbeit.bibliothek.repo.AusleihRepo;
 import com.hausarbeit.bibliothek.repo.PublikationRepo;
@@ -80,7 +81,7 @@ public class Publikationservices {
      * @param publikationID
      * @param request
      */
-    public void publikationUpdaten(Long publikationID, Publikation request) {
+    public void publikationUpdaten(Long publikationID, PublikationRequest request) {
         if (request.getBestandAnzahl() < 1){
             throw new RequestBibliothekException("Die Bestandsanzahl muss größer als null sein.");
         }
@@ -91,8 +92,18 @@ public class Publikationservices {
         publikationneu.setISBN(request.getISBN());
         publikationneu.setBestandAnzahl(request.getBestandAnzahl());
         publikationneu.setVerlag(request.getVerlag());
-        publikationneu.setSchlagwoerter(request.getSchlagwoerter());
         publikationneu.setVeroeffentlichung(request.getVeroeffentlichung());
+        publikationneu.schlagwoerter = new ArrayList<Schlagwoerter>();
+        String[] schlagwoerter = request.getSchlagwoerter();
+        int laenge = schlagwoerter.length;
+        while (laenge > 0){
+            int arrayStelle = laenge-1;
+            String schlagwortString = schlagwoerter[arrayStelle];
+            Long id = schlagwortRepo.findBySchlagwort(schlagwortString);
+            Schlagwoerter schlagwort = schlagwortRepo.findSchlagwoerterBySchlagwoerterID(id);
+            publikationneu.schlagwörterZuweisen(schlagwort);
+            laenge = laenge-1;
+        }
         publikationRepo.save(publikationneu);
 
     }
@@ -113,8 +124,38 @@ public class Publikationservices {
      * Gibt alle Publikationen wider
      * @return
      */
-    public List<Publikation> publikationenLaden() {
-        return this.publikationRepo.findAll();
+    public List<PublikationMitSchlagwort> publikationenLaden() {
+        List<Publikation> publikationList = publikationRepo.findAll();
+        List<PublikationMitSchlagwort> publikationMitSchlagwortList= new ArrayList<PublikationMitSchlagwort>();
+        int laenge = publikationList.size();
+        while (laenge > 0){
+            int arrayPlatz = laenge -1;
+            Publikation publikation;
+            PublikationMitSchlagwort publikationMitSchlagwort= new PublikationMitSchlagwort();
+            publikation = publikationList.get(arrayPlatz);
+            List<Schlagwoerter> schlagwoerterList= publikation.getSchlagwoerter();
+            int laengeZwei = schlagwoerterList.size();
+            String[] schlagwortArray = new String[laengeZwei];
+            while (laengeZwei > 0){
+                int arrayPlatzZwei = laengeZwei -1;
+                Schlagwoerter schlagwortObjekt = schlagwoerterList.get(arrayPlatzZwei);
+                String schlagwort = schlagwortObjekt.getSchlagwort();
+                schlagwortArray[arrayPlatzZwei] = schlagwort;
+                laengeZwei = laengeZwei -1;
+            }
+            publikationMitSchlagwort.setTitel(publikation.getTitel());
+            publikationMitSchlagwort.setPublikationID(publikation.getPublikationID());
+            publikationMitSchlagwort.setPublikationsart(publikation.getPublikationsart());
+            publikationMitSchlagwort.setSchlagwoerter(schlagwortArray);
+            publikationMitSchlagwort.setAutor(publikation.getAutor());
+            publikationMitSchlagwort.setBestandAnzahl(publikation.getBestandAnzahl());
+            publikationMitSchlagwort.setISBN(publikation.getISBN());
+            publikationMitSchlagwort.setVerlag(publikation.getVerlag());
+            publikationMitSchlagwort.setVeroeffentlichung(publikation.getVeroeffentlichung());
+            publikationMitSchlagwortList.add(publikationMitSchlagwort);
+            laenge = laenge -1;
+        }
+        return publikationMitSchlagwortList;
     }
 
     /**
@@ -123,16 +164,11 @@ public class Publikationservices {
      * @return
      */
     public Publikation publikationLaden(Long publikationID) {
-        if (publikationID == null) {
-            throw new RequestBibliothekException("Publikations-ID ist notwendig!");}
-            Publikation publikation;
-            try {
-                publikation = this.publikationRepo.findPublikationByPublikationID(publikationID);
-            } catch (EntityNotFoundException e) {
-                throw new EntityNotFoundException(e.getMessage());
 
-            }
-            return publikation;
+        Publikation publikation;
+        publikation = this.publikationRepo.findPublikationByPublikationID(publikationID);
+        return publikation;
+
         }
 
     /**
