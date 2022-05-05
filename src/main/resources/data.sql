@@ -9,4 +9,18 @@ INSERT INTO `bibliotheksverwaltung`.`schlagwoerter` (`schlagwoerterid`, `schlagw
 INSERT INTO `bibliotheksverwaltung`.`schlagwoerter` (`schlagwoerterid`, `schlagwort`) VALUES ('2', 'Fanatasy');
 INSERT INTO `bibliotheksverwaltung`.`schlagwoerter` (`schlagwoerterid`, `schlagwort`) VALUES ('3', 'Roman');
 INSERT INTO `bibliotheksverwaltung`.`schlagwoerter` (`schlagwoerterid`, `schlagwort`) VALUES ('4', 'Geschichte');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('1', '2');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('1', '3');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('2', '2');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('2', '3');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('3', '2');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('3', '3');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('4', '2');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('4', '3');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('5', '2');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('5', '3');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('6', '2');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('6', '3');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('7', '2');
+INSERT INTO `bibliotheksverwaltung`.`schlagwoerter_publikation` (`publikation_id`, `schlagwoerter_id`) VALUES ('7', '3');
 INSERT INTO `bibliotheksverwaltung`.`ausleihvorgang` (`vorgangid`, `ausgabedatum`, `ausleih_counter`, `matrikelnummer`, `name`, `pubid`, `pub_titel`, `rueckgabedatum`, `vorname`) VALUES ('1', '2022-05-03', '2', '94142', 'Schmidt', '1', 'Harry Potter und der Stein der Weisen', '2022-05-17', 'Markus');

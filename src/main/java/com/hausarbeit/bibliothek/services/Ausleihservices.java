@@ -63,7 +63,7 @@ public class Ausleihservices {
     }
 
     /**
-     * Gibt alle Ausleihvorgänge wider
+     * Gibt alle Ausleihvorgänge wieder
      * @return
      */
     public List<Ausleihvorgang> ausleihvorgaengeLaden(){

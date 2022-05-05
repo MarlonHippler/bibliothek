@@ -122,7 +122,7 @@ public class Publikationservices {
     }
 
     /**
-     * Gibt alle Publikationen wider
+     * Gibt alle Publikationen wieder
      * @return
      */
     public List<PublikationMitSchlagwort> publikationenLaden() {
@@ -160,7 +160,7 @@ public class Publikationservices {
     }
 
     /**
-     * Gibt anhand der publikationID eine Publikation wider
+     * Gibt anhand der publikationID eine Publikation wieder
      * @param publikationID
      * @return
      */
@@ -173,7 +173,7 @@ public class Publikationservices {
         }
 
     /**
-     * Gibt die zu einer Publikation gehörenden Ausleihvorgänge anhand der publikationID wider
+     * Gibt die zu einer Publikation gehörenden Ausleihvorgänge anhand der publikationID wieder
      * @param publikationID
      * @return
      */
@@ -182,12 +182,6 @@ public class Publikationservices {
     }
 
 
-    public void verbindungSuP(Long schlagwoerterID, Long publikationID) {
-        Schlagwoerter schlagwort = schlagwortRepo.getById(schlagwoerterID);
-        Publikation publikation = publikationRepo.getById(publikationID);
-        schlagwort.publikationZuweisen(publikation);
-        schlagwortRepo.save(schlagwort);
-    }
 }
 
 

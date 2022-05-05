@@ -40,7 +40,7 @@ public class AusleihController {
     }
 
     /**
-     * Gibt alle Ausleihvorgänge wider
+     * Gibt alle Ausleihvorgänge wieder
      * @return
      */
     @GetMapping("ausleihen/leihvorgaengeLaden")
@@ -49,7 +49,7 @@ public class AusleihController {
     }
 
     /**
-     * Gibt einen einzelnen Ausleihvorgang anhand der vorgangID wider
+     * Gibt einen einzelnen Ausleihvorgang anhand der vorgangID wieder
      * @param vorgangID
      * @return
      */

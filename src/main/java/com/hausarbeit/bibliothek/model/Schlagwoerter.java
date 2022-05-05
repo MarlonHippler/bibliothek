@@ -5,6 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Klasse für die Schlagwörter
+ * @author Marlon
+ */
 @Entity
 @Table(name = "schlagwoerter")
 public class Schlagwoerter {
