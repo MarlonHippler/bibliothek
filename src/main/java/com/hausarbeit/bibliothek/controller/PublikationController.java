@@ -38,7 +38,7 @@ public class PublikationController {
     }
 
     /**
-     * Gibt alle Publikationen wider
+     * Gibt alle Publikationen wieder
      * @return
      */
     @GetMapping("publikation/alleLaden")
@@ -56,7 +56,7 @@ public class PublikationController {
     }
 
     /**
-     * Gibt eine einzelne Publikation wider
+     * Gibt eine einzelne Publikation wieder
      * @param publikationID
      * @return
      */
@@ -76,7 +76,7 @@ public class PublikationController {
     }
 
     /**
-     * Gibt die zu einer Publikation gehörenden Ausleihvorgänge wider
+     * Gibt die zu einer Publikation gehörenden Ausleihvorgänge wieder
      * @param publikationID
      * @return
      */
@@ -84,14 +84,5 @@ public class PublikationController {
     public List<Ausleihvorgang> zugehoerigeAusleihvorgaenge(@PathVariable Long publikationID){
         return publikationservice.zugehoerigeAusleihvorgaenge(publikationID);
     }
-
-    @PutMapping("/{schlagwoerterID}/Publikation/{publikationID}")
-    public void verbindungSuP(
-            @PathVariable Long schlagwoerterID,
-            @PathVariable Long publikationID
-    ){
-        publikationservice.verbindungSuP(schlagwoerterID,publikationID);
-    }
-
 
     }

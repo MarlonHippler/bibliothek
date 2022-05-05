@@ -1,11 +1,11 @@
 package com.hausarbeit.bibliothek.model;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import java.util.Date;
-import java.util.List;
 
+/**
+ * Modell Klasse für das Anzeigen von der Publikation inklusive der Schlagwörter
+ * @author Marlon Hippler
+ */
 public class PublikationMitSchlagwort {
 
     public PublikationMitSchlagwort() {
