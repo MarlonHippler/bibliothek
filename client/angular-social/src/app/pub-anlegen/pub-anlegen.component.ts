@@ -9,6 +9,7 @@ import {PubModel} from "../models/publikation-model";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableDataSource} from "@angular/material/table";
 
+// autor marc
 
 @Component({
   selector: 'app-pub-anlegen',
@@ -21,7 +22,7 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
   @Input() pubAnlegenForm: FormGroup;
   private destroy$: Subject<boolean> = new Subject<boolean>();
   pubID!: number;
-  vorgangstyp = "anlegen";
+  vorgangstyp = "anlegen"; // initiales bestimmen eines vorgangstyps ´(anlegen vs updaten einer pub)
   schlagwoerter = new FormControl();
   schlagwoerterList: string[] = ['Roman', 'Wissenschaft', 'Fantasy', 'Geschichte'];
 
@@ -43,7 +44,7 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
 
 
   toLocalDateString(veroeffentlichung: string): string {
-    return new Date(veroeffentlichung).toISOString().slice(0, 10);
+    return new Date(veroeffentlichung).toISOString().slice(0, 10); // datum format anpassen
   }
 
   onsubmit(): void {
@@ -51,7 +52,7 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
     if (
       this.pubAnlegenForm.valid
     ) {
-      if (this.pubID) {
+      if (this.pubID) { //wenn die pubID vorhanden ist, wurde die pub bereits angelegt (weil sie initial vom system vergeben wird) daher updatet die komponente
         let pubUpdate = {
           pubID: this.pubID,
           titel: this.pubAnlegenForm.get('titel')?.value,
@@ -64,9 +65,14 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
           schlagwoerter: this.pubAnlegenForm.get('schlagwoerter')?.value,
           bestandAnzahl: this.pubAnlegenForm.get('bestandAnzahl')?.value,
         } as PubModel
-          this.pubService.bearbeitePub(pubUpdate).pipe(takeUntil(this.destroy$)).subscribe(
+          this.pubService.bearbeitePub(pubUpdate).pipe(takeUntil(this.destroy$)).subscribe(publikation => {
+            },
+            error => {
+              if (error.error) {
+                this.openSnackBar(error.error.nachricht)
+              }}
           )
-        } else {
+        } else {  // ansonsten neue pub anlegen
         let pub = {
           titel: this.pubAnlegenForm.get('titel')?.value,
           autor: this.pubAnlegenForm.get('autor')?.value,
@@ -103,9 +109,9 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
 
     ngOnInit()
     {
-      this.pubID = parseInt(this.route.snapshot.paramMap.get('id') as string);
+      this.pubID = parseInt(this.route.snapshot.paramMap.get('id') as string); //id aus der url lesen
 
-      if (this.pubID) {
+      if (this.pubID) { //wenn pub bereits voirhanden, belege ich die Felder vor
         this.vorgangstyp = "bearbeiten"
         this.pubService.zeigeEinenPub(this.pubID)
           .pipe(takeUntil(this.destroy$))

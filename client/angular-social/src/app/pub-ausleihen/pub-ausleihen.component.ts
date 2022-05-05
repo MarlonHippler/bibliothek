@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PubService} from "../services/pub.service";
 import {pipe, Subject, takeUntil} from "rxjs";
 import {PubAusleihenModel} from "../models/pub-ausleihen-model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-pub-ausleihen',
@@ -18,7 +19,7 @@ export class PubAusleihenComponent implements OnDestroy{
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
 
-  constructor(private pubAusleihenService: PubService) {
+  constructor(private pubAusleihenService: PubService, private snackBar: MatSnackBar) {
     this.pubAusleihenForm = new FormGroup({
       pubID: new FormControl('', Validators.required),
       vorname: new FormControl('', Validators.required),
@@ -43,7 +44,12 @@ export class PubAusleihenComponent implements OnDestroy{
 
 
       } as PubAusleihenModel
-      this.pubAusleihenService.ausleihenPub(pub).pipe(takeUntil(this.destroy$)).subscribe()
+      this.pubAusleihenService.ausleihenPub(pub).pipe(takeUntil(this.destroy$)).subscribe(publikation => {
+        },
+        error => {
+          if (error.error) {
+            this.openSnackBar(error.error.nachricht)
+          }})
 
     }
   }
@@ -52,7 +58,11 @@ export class PubAusleihenComponent implements OnDestroy{
       this.destroy$.next(true);
       this.destroy$.unsubscribe();
     }
-
+    openSnackBar(nachricht: string): void {
+      this.snackBar.open(nachricht, 'X', {
+        duration: 5000
+      })
+    }
 }
 
 

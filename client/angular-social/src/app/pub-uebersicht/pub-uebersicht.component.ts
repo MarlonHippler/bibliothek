@@ -13,14 +13,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./pub-uebersicht.component.css']
 })
 
-// titel: string
-//   autor: string
-//   veroeffentlichung: Date
-//   verlag: string
-//   publikationsart: string
-//   ISBN: string
-//   schlagwoerter: string
-//   bestandAnzahl: number
+// autor marc
+
 export class PubUebersichtComponent implements OnInit, OnDestroy {
   displayedColumns: any[] = ['publikationID', 'titel', 'autor', 'veroeffentlichung', 'publikationsart',
     'verlag', 'isbn', 'schlagwoerter', 'bestandAnzahl', 'bearbeiten', 'loeschen'];
@@ -34,7 +28,7 @@ export class PubUebersichtComponent implements OnInit, OnDestroy {
   ) {
   } // service reingeben lassen
 
-  ngOnInit(): void {
+  ngOnInit(): void { //pubs abrufen
     this.dataSource = this.pubService.zeigeAllePubs()
     this.pubService.zeigeAllePubs().pipe(takeUntil(this.destroy$)).subscribe(
       publikation =>
@@ -44,14 +38,14 @@ export class PubUebersichtComponent implements OnInit, OnDestroy {
   })}
 
   toLocalDateString(veroeffentlichung: string): string {
-    return new Date(veroeffentlichung).toISOString().slice(0, 10);
+    return new Date(veroeffentlichung).toISOString().slice(0, 10); //format fürs datum
   }
 
   pubLoeschen(pubID: number) {
 
     this.pubService.loeschePub(pubID).pipe(takeUntil(this.destroy$)).subscribe(
       () =>{},
-    error => {if(error.error){this.openSnackBar(error.error.message)}})
+    error => {if(error.error){this.openSnackBar(error.error.nachricht)}})
 
   }
 
@@ -59,14 +53,12 @@ export class PubUebersichtComponent implements OnInit, OnDestroy {
     this.destroy$.next(true)
     this.destroy$.unsubscribe()
   }
-  suchen(suchwert: string) {this.publikations.filter = suchwert.trim()
+  suchen(suchwert: string) {this.publikations.filter = suchwert.trim() //suchfunktion für die suche in der übersicht
   }
-  // /**
-  //  * Opens a snackbar with the given string as message
-  //  * @param message given string
-  //  */
-  openSnackBar(message: string): void {
-    this.snackBar.open(message, 'X', {
+
+
+  openSnackBar(nachricht: string): void {
+    this.snackBar.open(nachricht, 'X', {
       duration: 5000
     })
   }

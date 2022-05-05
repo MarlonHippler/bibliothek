@@ -50,7 +50,7 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
       {path: 'ausleihen', component: PubAusleihenComponent},
       {path: 'leihvorganguebersicht', component: LeihvorgaengeUebersichtComponent},
 
-      // {path: 'loeschen', component: PubLoeschenComponent}
+      // Routen an dieser Stelle werden genutzt
 
     ]),
     MatInputModule,
