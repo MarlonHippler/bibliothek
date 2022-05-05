@@ -17,4 +17,7 @@ export class LeihvorgangService {
   verlaengereLeihvorgang( leihvorgangModel: LeihvorgangModel): Observable<LeihvorgangModel> {
     return this.http.put<LeihvorgangModel>(this.leihUrl + "ausleihen/verlaengern/" + leihvorgangModel.vorgangID, leihvorgangModel)
   }
+  zurueckgeben( leihvorgangModel: LeihvorgangModel): Observable<LeihvorgangModel> {
+    return this.http.put<LeihvorgangModel>(this.leihUrl + "ausleihen/zurueckgeben/" + leihvorgangModel.vorgangID, leihvorgangModel)
+  }
 }

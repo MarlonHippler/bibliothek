@@ -22,9 +22,12 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
   private destroy$: Subject<boolean> = new Subject<boolean>();
   pubID!: number;
   vorgangstyp = "anlegen";
+  schlagwoerter = new FormControl();
+  schlagwoerterList: string[] = ['Roman', 'Wissenschaft', 'Fantasy', 'Geschichte'];
 
 
   constructor(private pubService: PubService, private route: ActivatedRoute, private snackBar: MatSnackBar) {
+
     this.pubAnlegenForm = new FormGroup({
       titel: new FormControl('', Validators.required),
       autor: new FormControl('', Validators.required),
@@ -32,7 +35,7 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
       verlag: new FormControl(''),
       publikationsart: new FormControl(''),
       ISBN: new FormControl(''),
-      schlagwoerter: new FormArray( []),
+      schlagwoerter: new FormControl( [] ),
       bestandAnzahl: new FormControl('')
 
     })

@@ -22,6 +22,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSortModule} from "@angular/material/sort";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
     PubUebersichtComponent,
     PubAnlegenComponent,
 
-    // PubLoeschenComponent,
+
 
 
   ],
@@ -61,6 +62,7 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
     MatSelectModule,
     MatSortModule,
     MatSnackBarModule,
+    MatButtonToggleModule,
 
 
   ],

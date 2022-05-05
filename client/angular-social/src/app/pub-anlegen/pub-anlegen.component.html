@@ -70,16 +70,14 @@
   </div>
   <div class="form-group">
 
-    <mat-form-field>
+
+
+
+    <mat-form-field appearance="fill">
       <mat-label id="schlagwoerter">Schlagwörter</mat-label>
-      <mat-label>Publikationsart</mat-label>
-      <select (change)="schlagwoerterHinzufuegen($any($event.target).value)" matNativeControl required>
-        <option value="Roman">Roman</option>
-        <option value="Wissenschaft">Wissenschaft</option>
-        <option value="Fantasy">Fantasy</option>
-        <option value="Geschichte">Geschichte</option>
-        <input matInput class="form-control">
-      </select>
+      <mat-select [formControl]="schlagwoerter" multiple>
+        <mat-option *ngFor="let schlagwoerter of schlagwoerterList" [value]="schlagwoerter">{{schlagwoerter}}</mat-option>
+      </mat-select>
     </mat-form-field>
 
   </div>

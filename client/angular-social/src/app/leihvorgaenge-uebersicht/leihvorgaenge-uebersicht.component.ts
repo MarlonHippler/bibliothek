@@ -23,7 +23,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 
 export class LeihvorgaengeUebersichtComponent implements OnInit {
   displayedColumns: string[] = ['vorgangID','pubID', 'vorname', 'name', 'matrikelnummer', 'ausgabedatum',
-    'rueckgabedatum', 'leihfristVerlaengern'];
+    'rueckgabedatum', 'leihfristVerlaengern', "rueckgabe"];
 
   public dataSource!: Observable<LeihvorgangModel[]>;
   private destroy$: Subject<boolean> = new Subject<boolean>();
@@ -42,6 +42,14 @@ export class LeihvorgaengeUebersichtComponent implements OnInit {
   leihvorgangVerlaengern(leihvorgangModel: LeihvorgangModel) {
     console.log(leihvorgangModel.vorgangID)
     this.leihvorgangService.verlaengereLeihvorgang(leihvorgangModel).pipe(takeUntil(this.destroy$)).subscribe()
+
+
+
+  }
+  rueckgabe(leihvorgangModel: LeihvorgangModel) {
+    console.log(leihvorgangModel.vorgangID)
+    this.leihvorgangService.zurueckgeben(leihvorgangModel).pipe(takeUntil(this.destroy$)).subscribe()
+
 
 
   }
