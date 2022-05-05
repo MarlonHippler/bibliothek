@@ -5,7 +5,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.Date;
+/**
+ * RequestBody fürs Ausleihvorgänge
+ * @author Marlon Hippler
+ */
 
 @AllArgsConstructor
 @Getter

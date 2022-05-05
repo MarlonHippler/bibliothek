@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Enthält das Model für einen Ausleihvorgang
+ *
+ * @author Marlon Hippler
+ */
 @Entity
 @Table
 public class Ausleihvorgang implements Serializable {

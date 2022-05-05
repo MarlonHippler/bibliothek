@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-
+/**
+ * CustomExceptionHandler
+ * @author Marlon Hippler
+ */
 @ControllerAdvice
 public class CustomExceptionHandler {
-    @ExceptionHandler(value = {PublikationException.class})
-    public ResponseEntity<Object> handlePublikationException(PublikationException e){
+    @ExceptionHandler(value = {RequestBibliothekException.class})
+    public ResponseEntity<Object> handlePublikationException(RequestBibliothekException e){
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
         BibliothekException bibliothekException = new BibliothekException(
                 e.getMessage(),

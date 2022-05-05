@@ -1,6 +1,6 @@
 package com.hausarbeit.bibliothek.services;
 
-import com.hausarbeit.bibliothek.exception.PublikationException;
+import com.hausarbeit.bibliothek.exception.RequestBibliothekException;
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.repo.AusleihRepo;
@@ -10,14 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+/**
+ * Services rund ums Anlegen, löschen, laden und Bearbeiten von Publikationen
+ * @author Marlon Hippler
+ */
 @Service
 public class Publikationservices {
 
@@ -30,16 +28,20 @@ public class Publikationservices {
         this.ausleihRepo = ausleihRepo;
     }
 
+    /**
+     * Legt neue Publikation an
+     * @param request
+     */
     public void publikationAnlegen(PublikationRequest request) {
 
         if (request.getBestandAnzahl() < 1){
-            throw new PublikationException("Die Bestandsanzahl muss größer als null sein.");
+            throw new RequestBibliothekException("Die Bestandsanzahl muss größer als null sein.");
         } else {
             if(request.getISBN() != null){
             UtilityService utilityService = new UtilityService();
             boolean check = utilityService.checkISBN(request.getISBN());
             if (check == false) {
-                throw new PublikationException("ISBN Format falsch");
+                throw new RequestBibliothekException("ISBN Format falsch");
             }
             }
             Publikation publikation = new Publikation();
@@ -55,9 +57,14 @@ public class Publikationservices {
         }
     }
 
+    /**
+     * Updatet eine bestimmte Publikation anhand der ID
+     * @param publikationID
+     * @param request
+     */
     public void publikationUpdaten(Long publikationID, Publikation request) {
         if (request.getBestandAnzahl() < 1){
-            throw new PublikationException("Die Bestandsanzahl muss größer als null sein.");
+            throw new RequestBibliothekException("Die Bestandsanzahl muss größer als null sein.");
         }
         Publikation publikationneu = publikationRepo.findPublikationByPublikationID(publikationID);
         publikationneu.setTitel(request.getTitel());
@@ -71,22 +78,34 @@ public class Publikationservices {
         publikationRepo.save(publikationneu);
     }
 
+    /**
+     * Löscht eine Publikation
+     * @param publikationID
+     */
     public void publikationLoeschen(long publikationID) {
         boolean existiert = publikationRepo.existsById(publikationID);
         if (!existiert) {
-            throw new PublikationException("Publikation mit ID" + publikationID + " existiert nicht");
+            throw new RequestBibliothekException("Publikation mit ID" + publikationID + " existiert nicht");
         }
         publikationRepo.deleteById(publikationID);
     }
 
-
+    /**
+     * Gibt alle Publikationen wider
+     * @return
+     */
     public List<Publikation> publikationenLaden() {
         return this.publikationRepo.findAll();
     }
 
+    /**
+     * Gibt anhand der publikationID eine Publikation wider
+     * @param publikationID
+     * @return
+     */
     public Publikation publikationLaden(Long publikationID) {
         if (publikationID == null) {
-            throw new PublikationException("Publikations-ID ist notwendig!");}
+            throw new RequestBibliothekException("Publikations-ID ist notwendig!");}
             Publikation publikation;
             try {
                 publikation = this.publikationRepo.findPublikationByPublikationID(publikationID);
@@ -97,6 +116,11 @@ public class Publikationservices {
             return publikation;
         }
 
+    /**
+     * Gibt die zu einer Publikation gehörenden Ausleihvorgänge anhand der publikationID wider
+     * @param publikationID
+     * @return
+     */
     public List<Ausleihvorgang> zugehoerigeAusleihvorgaenge(Long publikationID) {
         return ausleihRepo.findByPublikationID(publikationID);
     }

@@ -1,18 +1,23 @@
 package com.hausarbeit.bibliothek.services;
 
-import com.hausarbeit.bibliothek.exception.PublikationException;
-import com.hausarbeit.bibliothek.model.Publikation;
-import com.hausarbeit.bibliothek.repo.AusleihRepo;
-import com.hausarbeit.bibliothek.repo.PublikationRepo;
+import com.hausarbeit.bibliothek.exception.RequestBibliothekException;
 
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Klasse für Methoden, die nicht zu Publikationservices oder Ausleihservices passen
+ * @author Marlon Hippler
+ */
 public class UtilityService {
     public UtilityService() {
     }
 
+    /**
+     * Überprüft, ob es sich um eine ISBN handelt
+     * @param ISBN
+     * @return
+     */
     public boolean checkISBN (String ISBN){
         String regex ="^(?:ISBN(?:-10)?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$)[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$";
         Pattern pattern = Pattern.compile(regex);
@@ -23,7 +28,7 @@ public class UtilityService {
             int length = 0;
             length = ISBN.length();
             if(length<10){
-                throw new PublikationException("Falsches ISBN Format, die ISBN muss mindestens 10 Zahlen enthalten");
+                throw new RequestBibliothekException("Falsches ISBN Format, die ISBN muss mindestens 10 Zahlen enthalten");
             }
 
             // remove all hyphens
@@ -58,6 +63,12 @@ public class UtilityService {
             return false;
     }
 }
+
+    /**
+     * Checkt ob es sich bei einer 10-stelligen Nummer um eine ISBN handelt
+     * @param ISBN
+     * @return
+     */
     private static boolean istISBN10(String ISBN) {
 
         // declare variables
@@ -88,6 +99,12 @@ public class UtilityService {
 
         return false;
     }
+
+    /**
+     * Checkt ob es sich bei einer 13-stelligen Nummer um eine ISBN handelt
+     * @param ISBN
+     * @return
+     */
     private static boolean istISBN13(String ISBN) {
 
         // declare variables

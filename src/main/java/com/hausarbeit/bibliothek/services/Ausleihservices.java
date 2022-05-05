@@ -1,6 +1,6 @@
 package com.hausarbeit.bibliothek.services;
 
-import com.hausarbeit.bibliothek.exception.PublikationException;
+import com.hausarbeit.bibliothek.exception.RequestBibliothekException;
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.repo.AusleihRepo;
@@ -13,6 +13,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Services für die Ausleihvorgänge von Publikationen
+ * @author Marlon Hippler
+ */
 @Service
 public class Ausleihservices {
 
@@ -25,11 +29,15 @@ public class Ausleihservices {
         this.publikationRepo = publikationRepo;
     }
 
+    /**
+     * Leiht eine Publikation aus dem Publikationbestand aus
+     * @param ausleihRequest
+     */
     public void ausleihen(AusleihRequest ausleihRequest){
         Publikation publikation = publikationRepo.findPublikationByPublikationID(ausleihRequest.getPubID());
         Integer Bestandsanzahl = publikation.getBestandAnzahl();
         if(Bestandsanzahl<1){
-            throw new PublikationException("Es sind nicht mehr genügend Exemplare verfügbar");
+            throw new RequestBibliothekException("Es sind nicht mehr genügend Exemplare verfügbar");
         } else {
             Ausleihvorgang ausleihvorgang = new Ausleihvorgang();
             ausleihvorgang.setMatrikelnummer(ausleihRequest.getMatrikelnummer());
@@ -54,10 +62,19 @@ public class Ausleihservices {
         }
     }
 
+    /**
+     * Gibt alle Ausleihvorgänge wider
+     * @return
+     */
     public List<Ausleihvorgang> ausleihvorgaengeLaden(){
         return this.ausleihRepo.findAll();
     }
 
+    /**
+     * Lädt einen einzelnen Ausleihvorgang anhand der ID
+     * @param vorgangID
+     * @return
+     */
     public Ausleihvorgang ausleihvorgangLaden(Long vorgangID) {
 
         Ausleihvorgang ausleihvorgang;
@@ -65,6 +82,10 @@ public class Ausleihservices {
         return ausleihvorgang;
     }
 
+    /**
+     * Gibt eine Publikation an den Bestand zurück, schließt Ausleihvorgang
+     * @param vorgangID
+     */
     public void zurueckgeben(Long vorgangID){
 
         Long pubID = ausleihRepo.findAusleihvorgangByVorgangID(vorgangID).getPubID();
@@ -78,12 +99,16 @@ public class Ausleihservices {
 
     }
 
+    /**
+     * Verlängert die Ausleihperiode eines Ausleihvorgangs
+     * @param vorgangID
+     */
     public void verlaengern(Long vorgangID){
 
         Ausleihvorgang ausleihvorgang = ausleihRepo.findAusleihvorgangByVorgangID(vorgangID);
         int counter = ausleihvorgang.getAusleihCounter();
         if (counter>1){
-            throw new PublikationException("Maximale Anzahl von Verlängerungen erreicht");
+            throw new RequestBibliothekException("Maximale Anzahl von Verlängerungen erreicht");
         } else {
             counter ++;
             Calendar calendar = Calendar.getInstance();

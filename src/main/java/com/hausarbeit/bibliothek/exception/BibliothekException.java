@@ -4,9 +4,14 @@ import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
 
+/**
+ * BibliothekException beinhaltet die Daten,
+ * die ans FrontEnd weitergegeben werden, wenn eine RequestBibliothekException geworfen wird.
+ * @author Marlon Hippler
+ */
 public class BibliothekException {
-    private final String nachricht;
 
+    private final String nachricht;
     private final HttpStatus httpStatus;
     private final ZonedDateTime timestamp;
 

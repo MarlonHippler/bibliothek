@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * AusleihvorgangsRepository
+ * @author Marlon Hippler
+ */
 
 @Repository
 
