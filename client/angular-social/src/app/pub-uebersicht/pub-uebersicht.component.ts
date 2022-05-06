@@ -6,6 +6,7 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-pub-uebersicht',
@@ -24,7 +25,7 @@ export class PubUebersichtComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
 
 
-  constructor(private pubService: PubService,  private snackBar: MatSnackBar
+  constructor(private pubService: PubService,  private snackBar: MatSnackBar, private router: Router
   ) {
   } // service reingeben lassen
 
@@ -44,7 +45,9 @@ export class PubUebersichtComponent implements OnInit, OnDestroy {
   pubLoeschen(pubID: number) {
 
     this.pubService.loeschePub(pubID).pipe(takeUntil(this.destroy$)).subscribe(
-      () =>{},
+      () =>{ this.ngOnInit()
+     
+        },
     error => {if(error.error){this.openSnackBar(error.error.nachricht)}})
 
   }
