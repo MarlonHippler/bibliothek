@@ -4,18 +4,13 @@ import com.hausarbeit.bibliothek.exception.RequestBibliothekException;
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.model.PublikationMitSchlagwort;
-import com.hausarbeit.bibliothek.model.Schlagwoerter;
 import com.hausarbeit.bibliothek.repo.AusleihRepo;
 import com.hausarbeit.bibliothek.repo.PublikationRepo;
 import com.hausarbeit.bibliothek.repo.SchlagwortRepo;
 import com.hausarbeit.bibliothek.request.PublikationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

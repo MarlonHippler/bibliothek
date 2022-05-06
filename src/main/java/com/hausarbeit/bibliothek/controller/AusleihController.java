@@ -1,7 +1,6 @@
 package com.hausarbeit.bibliothek.controller;
 
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
-import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.request.AusleihRequest;
 import com.hausarbeit.bibliothek.services.Ausleihservices;
 

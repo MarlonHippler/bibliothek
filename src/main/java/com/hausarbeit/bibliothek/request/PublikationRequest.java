@@ -4,11 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-
-
-import java.lang.reflect.Array;
 import java.util.Date;
-import java.util.List;
+
 
 /**
  * RequestBody für Publikationen

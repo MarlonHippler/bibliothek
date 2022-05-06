@@ -1,9 +1,7 @@
 package com.hausarbeit.bibliothek.controller;
 
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
-import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.model.PublikationMitSchlagwort;
-import com.hausarbeit.bibliothek.model.Schlagwoerter;
 import com.hausarbeit.bibliothek.request.PublikationRequest;
 import com.hausarbeit.bibliothek.services.Publikationservices;
 import org.springframework.beans.factory.annotation.Autowired;
