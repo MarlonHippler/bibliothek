@@ -28,6 +28,7 @@ public class Publikationservices {
     private PublikationRepo publikationRepo;
     private AusleihRepo ausleihRepo;
     private SchlagwortRepo schlagwortRepo;
+    private UtilityService utilityService = new UtilityService();
 
     @Autowired
     public Publikationservices(PublikationRepo publikationRepo, AusleihRepo ausleihRepo,SchlagwortRepo schlagwortRepo) {
@@ -41,40 +42,29 @@ public class Publikationservices {
      * @param request
      */
     public void publikationAnlegen(PublikationRequest request) {
-
-        if (request.getBestandAnzahl() < 1){
-            throw new RequestBibliothekException("Die Bestandsanzahl muss größer als null sein.");
-        } else {
-            System.out.println(request.getISBN());
-            if(request.getISBN() != ""){
-            UtilityService utilityService = new UtilityService();
-            boolean check = utilityService.checkISBN(request.getISBN());
-            if (check == false) {
-                throw new RequestBibliothekException("ISBN Format falsch");
-            }
-            }
-            Publikation publikation = new Publikation();
-            publikation.setTitel(request.getTitel());
-            publikation.setPublikationsart(request.getPublikationsart());
-            publikation.setAutor(request.getAutor());
-            publikation.setISBN(request.getISBN());
-            publikation.setBestandAnzahl(request.getBestandAnzahl());
-            publikation.setVerlag(request.getVerlag());
-            publikation.setVeroeffentlichung(request.getVeroeffentlichung());
-            publikation.schlagwoerter = new ArrayList<Schlagwoerter>();
-            String[] schlagwoerter = request.getSchlagwoerter();
-            int laenge = schlagwoerter.length;
-            while (laenge > 0){
-                int arrayStelle = laenge-1;
-                String schlagwortString = schlagwoerter[arrayStelle];
-                Long id = schlagwortRepo.findBySchlagwort(schlagwortString);
-                Schlagwoerter schlagwort = schlagwortRepo.findSchlagwoerterBySchlagwoerterID(id);
-                publikation.schlagwörterZuweisen(schlagwort);
-                laenge = laenge-1;
-            }
-            publikationRepo.save(publikation);
-
+        utilityService.eingabenCheck(request);
+        Publikation publikation = new Publikation();
+        publikation.setTitel(request.getTitel());
+        publikation.setPublikationsart(request.getPublikationsart());
+        publikation.setAutor(request.getAutor());
+        publikation.setISBN(request.getISBN());
+        publikation.setBestandAnzahl(request.getBestandAnzahl());
+        publikation.setVerlag(request.getVerlag());
+        publikation.setVeroeffentlichung(request.getVeroeffentlichung());
+        publikation.schlagwoerter = new ArrayList<Schlagwoerter>();
+        String[] schlagwoerter = request.getSchlagwoerter();
+        int laenge = schlagwoerter.length;
+        while (laenge > 0){
+            int arrayStelle = laenge-1;
+            String schlagwortString = schlagwoerter[arrayStelle];
+            Long id = schlagwortRepo.findBySchlagwort(schlagwortString);
+            Schlagwoerter schlagwort = schlagwortRepo.findSchlagwoerterBySchlagwoerterID(id);
+            publikation.schlagwörterZuweisen(schlagwort);
+            laenge = laenge-1;
         }
+        publikationRepo.save(publikation);
+
+
     }
 
     /**
@@ -83,9 +73,9 @@ public class Publikationservices {
      * @param request
      */
     public void publikationUpdaten(Long publikationID, PublikationRequest request) {
-        if (request.getBestandAnzahl() < 1){
-            throw new RequestBibliothekException("Die Bestandsanzahl muss größer als null sein.");
-        }
+
+        utilityService.eingabenCheck(request);
+
         Publikation publikationneu = publikationRepo.findPublikationByPublikationID(publikationID);
         publikationneu.setTitel(request.getTitel());
         publikationneu.setPublikationsart(request.getPublikationsart());
@@ -122,7 +112,8 @@ public class Publikationservices {
     }
 
     /**
-     * Gibt alle Publikationen wieder
+     * Gibt alle Publikationen wieder in Form von PublikationMitSchlagwort,
+     * da beim Objekt Publikation die Schlagwörter nicht auf der Frontend-Oberfläche angezeigt werden
      * @return
      */
     public List<PublikationMitSchlagwort> publikationenLaden() {
@@ -132,27 +123,8 @@ public class Publikationservices {
         while (laenge > 0){
             int arrayPlatz = laenge -1;
             Publikation publikation;
-            PublikationMitSchlagwort publikationMitSchlagwort= new PublikationMitSchlagwort();
             publikation = publikationList.get(arrayPlatz);
-            List<Schlagwoerter> schlagwoerterList= publikation.getSchlagwoerter();
-            int laengeZwei = schlagwoerterList.size();
-            String[] schlagwortArray = new String[laengeZwei];
-            while (laengeZwei > 0){
-                int arrayPlatzZwei = laengeZwei -1;
-                Schlagwoerter schlagwortObjekt = schlagwoerterList.get(arrayPlatzZwei);
-                String schlagwort = schlagwortObjekt.getSchlagwort();
-                schlagwortArray[arrayPlatzZwei] = schlagwort;
-                laengeZwei = laengeZwei -1;
-            }
-            publikationMitSchlagwort.setTitel(publikation.getTitel());
-            publikationMitSchlagwort.setPublikationID(publikation.getPublikationID());
-            publikationMitSchlagwort.setPublikationsart(publikation.getPublikationsart());
-            publikationMitSchlagwort.setSchlagwoerter(schlagwortArray);
-            publikationMitSchlagwort.setAutor(publikation.getAutor());
-            publikationMitSchlagwort.setBestandAnzahl(publikation.getBestandAnzahl());
-            publikationMitSchlagwort.setISBN(publikation.getISBN());
-            publikationMitSchlagwort.setVerlag(publikation.getVerlag());
-            publikationMitSchlagwort.setVeroeffentlichung(publikation.getVeroeffentlichung());
+            PublikationMitSchlagwort publikationMitSchlagwort = utilityService.publikationMitSchlagwortFormatierung(publikation);
             publikationMitSchlagwortList.add(publikationMitSchlagwort);
             laenge = laenge -1;
         }
@@ -160,15 +132,16 @@ public class Publikationservices {
     }
 
     /**
-     * Gibt anhand der publikationID eine Publikation wieder
+     * Gibt anhand der publikationID eine PublikationMitSchlagwort wieder
      * @param publikationID
      * @return
      */
-    public Publikation publikationLaden(Long publikationID) {
+    public PublikationMitSchlagwort publikationLaden(Long publikationID) {
 
         Publikation publikation;
         publikation = this.publikationRepo.findPublikationByPublikationID(publikationID);
-        return publikation;
+        PublikationMitSchlagwort publikationMitSchlagwort = utilityService.publikationMitSchlagwortFormatierung(publikation);
+        return publikationMitSchlagwort;
 
         }
 

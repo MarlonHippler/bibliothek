@@ -61,7 +61,7 @@ public class PublikationController {
      * @return
      */
     @GetMapping(path = "publikation/laden/{publikationID}")
-    public Publikation publikationLaden(@PathVariable Long publikationID) {
+    public PublikationMitSchlagwort publikationLaden(@PathVariable Long publikationID) {
     return publikationservice.publikationLaden(publikationID);
     }
 

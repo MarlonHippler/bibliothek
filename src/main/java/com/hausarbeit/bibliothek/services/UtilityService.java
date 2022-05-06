@@ -1,7 +1,12 @@
 package com.hausarbeit.bibliothek.services;
 
 import com.hausarbeit.bibliothek.exception.RequestBibliothekException;
+import com.hausarbeit.bibliothek.model.Publikation;
+import com.hausarbeit.bibliothek.model.PublikationMitSchlagwort;
+import com.hausarbeit.bibliothek.model.Schlagwoerter;
+import com.hausarbeit.bibliothek.request.PublikationRequest;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -133,6 +138,52 @@ public class UtilityService {
         if(sum%10 == 0)
             return true;
         return false;
+    }
+
+    /**
+     * Überprüft die Eingabe auf gültige Bestandsanzahl und ISBN
+     * @param request
+     */
+    public void eingabenCheck(PublikationRequest request) {
+        if (request.getBestandAnzahl() < 1) {
+            throw new RequestBibliothekException("Die Bestandsanzahl muss größer als null sein.");
+        }
+        if (request.getISBN() != "") {
+            boolean check = checkISBN(request.getISBN());
+            if (check == false) {
+                throw new RequestBibliothekException("Keine gültige ISBN");
+            }
+        }
+
+    }
+
+    /**
+     * Formatiert eine Publikation zu einer Publikation mit Schlagwortarray
+     * @param publikation
+     * @return
+     */
+    public PublikationMitSchlagwort publikationMitSchlagwortFormatierung (Publikation publikation){
+        PublikationMitSchlagwort publikationMitSchlagwort= new PublikationMitSchlagwort();
+        List<Schlagwoerter> schlagwoerterList= publikation.getSchlagwoerter();
+        int laengeZwei = schlagwoerterList.size();
+        String[] schlagwortArray = new String[laengeZwei];
+        while (laengeZwei > 0){
+            int arrayPlatzZwei = laengeZwei -1;
+            Schlagwoerter schlagwortObjekt = schlagwoerterList.get(arrayPlatzZwei);
+            String schlagwort = schlagwortObjekt.getSchlagwort();
+            schlagwortArray[arrayPlatzZwei] = schlagwort;
+            laengeZwei = laengeZwei -1;
+        }
+        publikationMitSchlagwort.setTitel(publikation.getTitel());
+        publikationMitSchlagwort.setPublikationID(publikation.getPublikationID());
+        publikationMitSchlagwort.setPublikationsart(publikation.getPublikationsart());
+        publikationMitSchlagwort.setSchlagwoerter(schlagwortArray);
+        publikationMitSchlagwort.setAutor(publikation.getAutor());
+        publikationMitSchlagwort.setBestandAnzahl(publikation.getBestandAnzahl());
+        publikationMitSchlagwort.setISBN(publikation.getISBN());
+        publikationMitSchlagwort.setVerlag(publikation.getVerlag());
+        publikationMitSchlagwort.setVeroeffentlichung(publikation.getVeroeffentlichung());
+        return publikationMitSchlagwort;
     }
 
 }
