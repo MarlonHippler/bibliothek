@@ -4,14 +4,16 @@ import com.hausarbeit.bibliothek.exception.RequestBibliothekException;
 import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.model.PublikationMitSchlagwort;
 import com.hausarbeit.bibliothek.model.Schlagwoerter;
+import com.hausarbeit.bibliothek.repo.SchlagwortRepo;
 import com.hausarbeit.bibliothek.request.PublikationRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Klasse für Methoden, die nicht zu Publikationservices oder Ausleihservices passen
+ * Klasse für Methoden, die dupliziert vorkamen oder nicht zu Publikationsservices oder Ausleihservices passen
  * @author Marlon Hippler
  */
 public class UtilityService {
@@ -20,6 +22,8 @@ public class UtilityService {
 
     /**
      * Überprüft, ob es sich um eine ISBN handelt
+     * Quelle: https://www.knowprogram.com/java/isbn-number-in-java/
+     * Quelle: https://howtodoinjava.com/java/regex/java-regex-validate-international-standard-book-number-isbns/
      * @param ISBN
      * @return
      */
@@ -31,16 +35,17 @@ public class UtilityService {
         if (stimmtÜberein = true){
             // declare variable
             int length = 0;
-            length = ISBN.length();
-            if(length<10){
-                throw new RequestBibliothekException("Falsches ISBN Format, die ISBN muss mindestens 10 Zahlen enthalten");
-            }
+
 
             // remove all hyphens
             ISBN = ISBN.replace("-", "");
             // remove all spaces
             ISBN = ISBN.replace(" ", "");
 
+            length = ISBN.length();
+            if(length<10){
+                throw new RequestBibliothekException("Falsches ISBN Format, die ISBN muss mindestens 10 Zahlen enthalten");
+            }
             // check result string is a number or not
             try {
                 // except for the case where
@@ -184,6 +189,35 @@ public class UtilityService {
         publikationMitSchlagwort.setVerlag(publikation.getVerlag());
         publikationMitSchlagwort.setVeroeffentlichung(publikation.getVeroeffentlichung());
         return publikationMitSchlagwort;
+    }
+
+    /**
+     * Weist beim erstellen oder updaten die Werte aus dem Request der neuen Publikation zu
+     * @param publikation
+     * @param request
+     * @param schlagwortRepo
+     * @return
+     */
+    public Publikation zuweisenPublikationswerte (Publikation publikation, PublikationRequest request, SchlagwortRepo schlagwortRepo){
+        publikation.setTitel(request.getTitel());
+        publikation.setPublikationsart(request.getPublikationsart());
+        publikation.setAutor(request.getAutor());
+        publikation.setISBN(request.getISBN());
+        publikation.setBestandAnzahl(request.getBestandAnzahl());
+        publikation.setVerlag(request.getVerlag());
+        publikation.setVeroeffentlichung(request.getVeroeffentlichung());
+        publikation.schlagwoerter = new ArrayList<Schlagwoerter>();
+        String[] schlagwoerter = request.getSchlagwoerter();
+        int laenge = schlagwoerter.length;
+        while (laenge > 0){
+            int arrayStelle = laenge-1;
+            String schlagwortString = schlagwoerter[arrayStelle];
+            Long id = schlagwortRepo.findBySchlagwort(schlagwortString);
+            Schlagwoerter schlagwort = schlagwortRepo.findSchlagwoerterBySchlagwoerterID(id);
+            publikation.schlagwörterZuweisen(schlagwort);
+            laenge = laenge-1;
+        }
+        return publikation;
     }
 
 }

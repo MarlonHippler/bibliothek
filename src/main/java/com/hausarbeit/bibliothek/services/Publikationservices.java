@@ -43,28 +43,9 @@ public class Publikationservices {
      */
     public void publikationAnlegen(PublikationRequest request) {
         utilityService.eingabenCheck(request);
-        Publikation publikation = new Publikation();
-        publikation.setTitel(request.getTitel());
-        publikation.setPublikationsart(request.getPublikationsart());
-        publikation.setAutor(request.getAutor());
-        publikation.setISBN(request.getISBN());
-        publikation.setBestandAnzahl(request.getBestandAnzahl());
-        publikation.setVerlag(request.getVerlag());
-        publikation.setVeroeffentlichung(request.getVeroeffentlichung());
-        publikation.schlagwoerter = new ArrayList<Schlagwoerter>();
-        String[] schlagwoerter = request.getSchlagwoerter();
-        int laenge = schlagwoerter.length;
-        while (laenge > 0){
-            int arrayStelle = laenge-1;
-            String schlagwortString = schlagwoerter[arrayStelle];
-            Long id = schlagwortRepo.findBySchlagwort(schlagwortString);
-            Schlagwoerter schlagwort = schlagwortRepo.findSchlagwoerterBySchlagwoerterID(id);
-            publikation.schlagwörterZuweisen(schlagwort);
-            laenge = laenge-1;
-        }
+        Publikation publikationZumReinwerfen = new Publikation();
+        Publikation publikation = utilityService.zuweisenPublikationswerte(publikationZumReinwerfen,request,schlagwortRepo);
         publikationRepo.save(publikation);
-
-
     }
 
     /**
@@ -76,25 +57,8 @@ public class Publikationservices {
 
         utilityService.eingabenCheck(request);
 
-        Publikation publikationneu = publikationRepo.findPublikationByPublikationID(publikationID);
-        publikationneu.setTitel(request.getTitel());
-        publikationneu.setPublikationsart(request.getPublikationsart());
-        publikationneu.setAutor(request.getAutor());
-        publikationneu.setISBN(request.getISBN());
-        publikationneu.setBestandAnzahl(request.getBestandAnzahl());
-        publikationneu.setVerlag(request.getVerlag());
-        publikationneu.setVeroeffentlichung(request.getVeroeffentlichung());
-        publikationneu.schlagwoerter = new ArrayList<Schlagwoerter>();
-        String[] schlagwoerter = request.getSchlagwoerter();
-        int laenge = schlagwoerter.length;
-        while (laenge > 0){
-            int arrayStelle = laenge-1;
-            String schlagwortString = schlagwoerter[arrayStelle];
-            Long id = schlagwortRepo.findBySchlagwort(schlagwortString);
-            Schlagwoerter schlagwort = schlagwortRepo.findSchlagwoerterBySchlagwoerterID(id);
-            publikationneu.schlagwörterZuweisen(schlagwort);
-            laenge = laenge-1;
-        }
+        Publikation publikationalt = publikationRepo.findPublikationByPublikationID(publikationID);
+        Publikation publikationneu = utilityService.zuweisenPublikationswerte(publikationalt,request,schlagwortRepo);
         publikationRepo.save(publikationneu);
 
     }
