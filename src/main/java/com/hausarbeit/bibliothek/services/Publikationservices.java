@@ -78,7 +78,7 @@ public class Publikationservices {
     /**
      * Gibt alle Publikationen wieder in Form von PublikationMitSchlagwort,
      * da beim Objekt Publikation die Schlagwörter nicht auf der Frontend-Oberfläche angezeigt werden
-     * @return
+     * @return List<PublikationMitSchlagwort>
      */
     public List<PublikationMitSchlagwort> publikationenLaden() {
         List<Publikation> publikationList = publikationRepo.findAll();
@@ -98,7 +98,7 @@ public class Publikationservices {
     /**
      * Gibt anhand der publikationID eine PublikationMitSchlagwort wieder
      * @param publikationID
-     * @return
+     * @return PublikationMitSchlagwort
      */
     public PublikationMitSchlagwort publikationLaden(Long publikationID) {
 
@@ -112,7 +112,7 @@ public class Publikationservices {
     /**
      * Gibt die zu einer Publikation gehörenden Ausleihvorgänge anhand der publikationID wieder
      * @param publikationID
-     * @return
+     * @return List<Ausleihvorgang>
      */
     public List<Ausleihvorgang> zugehoerigeAusleihvorgaenge(Long publikationID) {
         return ausleihRepo.findByPublikationID(publikationID);

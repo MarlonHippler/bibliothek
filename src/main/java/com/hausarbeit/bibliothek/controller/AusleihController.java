@@ -41,7 +41,7 @@ public class AusleihController {
 
     /**
      * Gibt alle Ausleihvorgänge wieder
-     * @return
+     * @return List<Ausleihvorgang>
      */
     @GetMapping("ausleihen/leihvorgaengeLaden")
     public List<Ausleihvorgang> ausleihvorgaengeLaden() {
@@ -51,7 +51,7 @@ public class AusleihController {
     /**
      * Gibt einen einzelnen Ausleihvorgang anhand der vorgangID wieder
      * @param vorgangID
-     * @return
+     * @return Ausleihvorgang
      */
     @GetMapping("ausleihen/leihvorgangLaden/{vorgangID}")
     public Ausleihvorgang ausleihvorgangLaden(@PathVariable("vorgangID") Long vorgangID){

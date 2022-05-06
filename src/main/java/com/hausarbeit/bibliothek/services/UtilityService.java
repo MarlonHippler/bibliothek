@@ -25,7 +25,7 @@ public class UtilityService {
      * Quelle: https://www.knowprogram.com/java/isbn-number-in-java/
      * Quelle: https://howtodoinjava.com/java/regex/java-regex-validate-international-standard-book-number-isbns/
      * @param ISBN
-     * @return
+     * @return boolean
      */
     public boolean checkISBN (String ISBN){
         String regex ="^(?:ISBN(?:-10)?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$)[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$";
@@ -166,7 +166,7 @@ public class UtilityService {
     /**
      * Formatiert eine Publikation zu einer Publikation mit Schlagwortarray
      * @param publikation
-     * @return
+     * @return PublikationMitSchlagwort
      */
     public PublikationMitSchlagwort publikationMitSchlagwortFormatierung (Publikation publikation){
         PublikationMitSchlagwort publikationMitSchlagwort= new PublikationMitSchlagwort();
@@ -197,7 +197,7 @@ public class UtilityService {
      * @param publikation
      * @param request
      * @param schlagwortRepo
-     * @return
+     * @return Publikation
      */
     public Publikation zuweisenPublikationswerte (Publikation publikation, PublikationRequest request, SchlagwortRepo schlagwortRepo){
         publikation.setTitel(request.getTitel());

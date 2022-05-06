@@ -39,7 +39,7 @@ public class PublikationController {
 
     /**
      * Gibt alle Publikationen wieder
-     * @return
+     * @return List<PublikationMitSchlagwort>
      */
     @GetMapping("publikation/alleLaden")
     public List<PublikationMitSchlagwort> publikationenLaden() {
@@ -58,7 +58,7 @@ public class PublikationController {
     /**
      * Gibt eine einzelne Publikation wieder
      * @param publikationID
-     * @return
+     * @return PublikationMitSchlagwort
      */
     @GetMapping(path = "publikation/laden/{publikationID}")
     public PublikationMitSchlagwort publikationLaden(@PathVariable Long publikationID) {
@@ -78,7 +78,7 @@ public class PublikationController {
     /**
      * Gibt die zu einer Publikation gehörenden Ausleihvorgänge wieder
      * @param publikationID
-     * @return
+     * @return List<Ausleihvorgang>
      */
     @GetMapping("publikation/ausleihvorgaenge/{publikationID}")
     public List<Ausleihvorgang> zugehoerigeAusleihvorgaenge(@PathVariable Long publikationID){

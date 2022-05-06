@@ -68,7 +68,7 @@ public class Ausleihservices {
 
     /**
      * Gibt alle Ausleihvorgänge wieder
-     * @return
+     * @return List<Ausleihvorgang>
      */
     public List<Ausleihvorgang> ausleihvorgaengeLaden(){
         return this.ausleihRepo.findAll();
@@ -77,7 +77,7 @@ public class Ausleihservices {
     /**
      * Lädt einen einzelnen Ausleihvorgang anhand der ID
      * @param vorgangID
-     * @return
+     * @return Ausleihvorgang
      */
     public Ausleihvorgang ausleihvorgangLaden(Long vorgangID) {
 
