@@ -53,7 +53,7 @@ public class Ausleihvorgang implements Serializable {
     public String pubTitel;
     public Date ausgabedatum;
     public Date rueckgabedatum;
-    public static int ausleihzeitraum = 14;
+    public static int ausleihzeitraum = 14; //14 Tage
     public int ausleihCounter;
     public Long pubID;
     public String name;

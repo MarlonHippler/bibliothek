@@ -1,7 +1,6 @@
 package com.hausarbeit.bibliothek.controller;
 
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
-import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.request.AusleihRequest;
 import com.hausarbeit.bibliothek.services.Ausleihservices;
 
@@ -41,7 +40,7 @@ public class AusleihController {
 
     /**
      * Gibt alle Ausleihvorgänge wieder
-     * @return
+     * @return List<Ausleihvorgang>
      */
     @GetMapping("ausleihen/leihvorgaengeLaden")
     public List<Ausleihvorgang> ausleihvorgaengeLaden() {
@@ -51,7 +50,7 @@ public class AusleihController {
     /**
      * Gibt einen einzelnen Ausleihvorgang anhand der vorgangID wieder
      * @param vorgangID
-     * @return
+     * @return Ausleihvorgang
      */
     @GetMapping("ausleihen/leihvorgangLaden/{vorgangID}")
     public Ausleihvorgang ausleihvorgangLaden(@PathVariable("vorgangID") Long vorgangID){

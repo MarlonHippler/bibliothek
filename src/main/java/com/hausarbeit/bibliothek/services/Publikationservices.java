@@ -4,18 +4,13 @@ import com.hausarbeit.bibliothek.exception.RequestBibliothekException;
 import com.hausarbeit.bibliothek.model.Ausleihvorgang;
 import com.hausarbeit.bibliothek.model.Publikation;
 import com.hausarbeit.bibliothek.model.PublikationMitSchlagwort;
-import com.hausarbeit.bibliothek.model.Schlagwoerter;
 import com.hausarbeit.bibliothek.repo.AusleihRepo;
 import com.hausarbeit.bibliothek.repo.PublikationRepo;
 import com.hausarbeit.bibliothek.repo.SchlagwortRepo;
 import com.hausarbeit.bibliothek.request.PublikationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -78,7 +73,7 @@ public class Publikationservices {
     /**
      * Gibt alle Publikationen wieder in Form von PublikationMitSchlagwort,
      * da beim Objekt Publikation die Schlagwörter nicht auf der Frontend-Oberfläche angezeigt werden
-     * @return
+     * @return List<PublikationMitSchlagwort>
      */
     public List<PublikationMitSchlagwort> publikationenLaden() {
         List<Publikation> publikationList = publikationRepo.findAll();
@@ -98,7 +93,7 @@ public class Publikationservices {
     /**
      * Gibt anhand der publikationID eine PublikationMitSchlagwort wieder
      * @param publikationID
-     * @return
+     * @return PublikationMitSchlagwort
      */
     public PublikationMitSchlagwort publikationLaden(Long publikationID) {
 
@@ -112,7 +107,7 @@ public class Publikationservices {
     /**
      * Gibt die zu einer Publikation gehörenden Ausleihvorgänge anhand der publikationID wieder
      * @param publikationID
-     * @return
+     * @return List<Ausleihvorgang>
      */
     public List<Ausleihvorgang> zugehoerigeAusleihvorgaenge(Long publikationID) {
         return ausleihRepo.findByPublikationID(publikationID);

@@ -1,13 +1,8 @@
 package com.hausarbeit.bibliothek.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.jetbrains.annotations.NotNull;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

@@ -34,6 +34,10 @@ public class Ausleihservices {
      * @param ausleihRequest
      */
     public void ausleihen(AusleihRequest ausleihRequest){
+        boolean existiert = publikationRepo.existsById(ausleihRequest.getPubID());
+        if (existiert == false){
+            throw new RequestBibliothekException("Die angegebene PublikationsID existiert nicht.");
+        }
         Publikation publikation = publikationRepo.findPublikationByPublikationID(ausleihRequest.getPubID());
         Integer Bestandsanzahl = publikation.getBestandAnzahl();
         if(Bestandsanzahl<1){
@@ -64,7 +68,7 @@ public class Ausleihservices {
 
     /**
      * Gibt alle Ausleihvorgänge wieder
-     * @return
+     * @return List<Ausleihvorgang>
      */
     public List<Ausleihvorgang> ausleihvorgaengeLaden(){
         return this.ausleihRepo.findAll();
@@ -73,7 +77,7 @@ public class Ausleihservices {
     /**
      * Lädt einen einzelnen Ausleihvorgang anhand der ID
      * @param vorgangID
-     * @return
+     * @return Ausleihvorgang
      */
     public Ausleihvorgang ausleihvorgangLaden(Long vorgangID) {
 
