@@ -23,7 +23,6 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
   private destroy$: Subject<boolean> = new Subject<boolean>();
   pubID!: number;
   vorgangstyp = "anlegen"; // initiales bestimmen eines vorgangstyps ´(anlegen vs updaten einer pub)
-  schlagwoerter = new FormControl();
   schlagwoerterList: string[] = ['Roman', 'Wissenschaft', 'Fantasy', 'Geschichte'];
 
 

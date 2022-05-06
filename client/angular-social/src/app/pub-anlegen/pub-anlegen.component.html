@@ -70,12 +70,9 @@
   </div>
   <div class="form-group">
 
-
-
-
     <mat-form-field appearance="fill">
       <mat-label id="schlagwoerter">Schlagwörter</mat-label>
-      <mat-select [formControl]="schlagwoerter" multiple>
+      <mat-select formControlName="schlagwoerter" multiple>
         <mat-option *ngFor="let schlagwoerter of schlagwoerterList" [value]="schlagwoerter">{{schlagwoerter}}</mat-option>
       </mat-select>
     </mat-form-field>
