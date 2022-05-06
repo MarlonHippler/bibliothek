@@ -4,6 +4,7 @@ import {LeihvorgangModel} from "../models/leihvorgang-model";
 import {LeihvorgangService} from "../services/leihvorgang.service";
 import {MatSort} from "@angular/material/sort";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ActivatedRoute} from "@angular/router";
 //autor Marc, übersicht der leihvorgänge
 
 @Component({
@@ -23,13 +24,20 @@ export class LeihvorgaengeUebersichtComponent implements OnInit {
   public dataSource!: Observable<LeihvorgangModel[]>;
   private destroy$: Subject<boolean> = new Subject<boolean>();
   @ViewChild(MatSort, {static: true}) sort!: MatSort; //fürs sortieren
+  private pubID!: number;
 
-  constructor(private leihvorgangService: LeihvorgangService, private pubService: PubService, private snackBar: MatSnackBar) {
+
+  constructor(private leihvorgangService: LeihvorgangService, private pubService: PubService, private snackBar: MatSnackBar,private route: ActivatedRoute) {
   } // services und snackbar reingeben
 
   ngOnInit(): void {
+    //hier if else nach url dann data source picken
+
+    this.pubID = parseInt(this.route.snapshot.paramMap.get('id') as string); //id aus der url lesen
+     if (this.pubID) { this.dataSource = this.pubService.zeigeAlleAusgeliehenenPubsnachPubID(this.pubID)
+     } else {
     this.dataSource = this.pubService.zeigeAlleAusgeliehenenPubs() //laden der leihgvorgänge in die tabelle
-  }
+  } }
 
   toLocalDateString(veroeffentlichung: string): string {
     return new Date(veroeffentlichung).toISOString().slice(0, 10); //datumsformat anpassen

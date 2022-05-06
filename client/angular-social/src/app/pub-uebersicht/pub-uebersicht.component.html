@@ -56,6 +56,14 @@
     </mat-cell>
 
   </ng-container>
+  <ng-container matColumnDef="zugehoerigeLeihvorgaenge">
+
+    <mat-header-cell *matHeaderCellDef> ausgeliehene Werke</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-button [routerLink]="['/leihvorganguebersicht/', row.publikationID ]"> Siehe Leihvorgänge</button>
+    </mat-cell>
+
+  </ng-container>
 
   <ng-container matColumnDef="loeschen">
     <div>

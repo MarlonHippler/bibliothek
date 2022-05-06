@@ -17,7 +17,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 
 export class PubUebersichtComponent implements OnInit, OnDestroy {
   displayedColumns: any[] = ['publikationID', 'titel', 'autor', 'veroeffentlichung', 'publikationsart',
-    'verlag', 'isbn', 'schlagwoerter', 'bestandAnzahl', 'bearbeiten', 'loeschen'];
+    'verlag', 'isbn', 'schlagwoerter', 'bestandAnzahl', 'bearbeiten', 'loeschen', "zugehoerigeLeihvorgaenge"];
   publikations!: MatTableDataSource<PubModel>
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public dataSource!: Observable<PubModel[]>;

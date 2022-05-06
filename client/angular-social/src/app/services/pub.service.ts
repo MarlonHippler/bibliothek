@@ -33,6 +33,9 @@ export class PubService {
   zeigeAlleAusgeliehenenPubs(): Observable<LeihvorgangModel[]> { //lädt alle´leihvorgänge
     return this.http.get<LeihvorgangModel[]>(this.pubUrl + "ausleihen/leihvorgaengeLaden")
   }
+  zeigeAlleAusgeliehenenPubsnachPubID(publikationID: number): Observable<LeihvorgangModel[]> { //lädt alle´leihvorgänge
+    return this.http.get<LeihvorgangModel[]>(this.pubUrl + "publikation/ausleihvorgaenge/" + publikationID)
+  }
 
 
 
