@@ -12,6 +12,10 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Publikations ID</th>
     <td mat-cell *matCellDef="let item"> {{item.pubID}} </td>
   </ng-container>
+  <ng-container matColumnDef="pubTitel">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Titel</th>
+    <td mat-cell *matCellDef="let item"> {{item.pubTitel}} </td>
+  </ng-container>
   <ng-container matColumnDef="vorname">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Vorname</th>
     <td mat-cell *matCellDef="let item"> {{item.vorname}} </td>

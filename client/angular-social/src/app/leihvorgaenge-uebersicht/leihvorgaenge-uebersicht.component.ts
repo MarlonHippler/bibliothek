@@ -18,7 +18,7 @@ import {ActivatedRoute} from "@angular/router";
 
 
 export class LeihvorgaengeUebersichtComponent implements OnInit {
-  displayedColumns: string[] = ['vorgangID','pubID', 'vorname', 'name', 'matrikelnummer', 'ausgabedatum',
+  displayedColumns: string[] = ['vorgangID','pubID','pubTitel' ,'vorname', 'name', 'matrikelnummer', 'ausgabedatum',
     'rueckgabedatum', 'leihfristVerlaengern', "rueckgabe"];
 
   public dataSource!: Observable<LeihvorgangModel[]>;

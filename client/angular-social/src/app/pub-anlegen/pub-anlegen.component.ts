@@ -37,7 +37,7 @@ export class PubAnlegenComponent implements OnDestroy, OnInit {
       publikationsart: new FormControl(''),
       ISBN: new FormControl(''),
       schlagwoerter: new FormControl( [] ),
-      bestandAnzahl: new FormControl('')
+      bestandAnzahl: new FormControl('', Validators.required)
 
     })
   }
