@@ -34,6 +34,10 @@ public class Ausleihservices {
      * @param ausleihRequest
      */
     public void ausleihen(AusleihRequest ausleihRequest){
+        boolean existiert = publikationRepo.existsById(ausleihRequest.getPubID());
+        if (existiert == false){
+            throw new RequestBibliothekException("Die angegebene PublikationsID existiert nicht.");
+        }
         Publikation publikation = publikationRepo.findPublikationByPublikationID(ausleihRequest.getPubID());
         Integer Bestandsanzahl = publikation.getBestandAnzahl();
         if(Bestandsanzahl<1){

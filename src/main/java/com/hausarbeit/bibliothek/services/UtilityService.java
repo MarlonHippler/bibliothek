@@ -153,6 +153,7 @@ public class UtilityService {
         if (request.getBestandAnzahl() < 1) {
             throw new RequestBibliothekException("Die Bestandsanzahl muss größer als null sein.");
         }
+
         if (request.getISBN() != "") {
             boolean check = checkISBN(request.getISBN());
             if (check == false) {
